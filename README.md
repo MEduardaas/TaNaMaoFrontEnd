@@ -25,6 +25,7 @@ O projeto estara aberto no seguinte link [http://localhost:3000](http://localhos
 ### Pasta App
 
 Nela contera todas as paginas do site por exemplo: Cadastrar, Login, etc. e nela contem a pagina home que sera o arquivo principal chamado page.tsx
+
 Para criar outras pagina deve criar uma nova pasta com o nome que sera da pagina e criar um arquivo page.tsx dentro da mesma.
 
 ### Pasta Components

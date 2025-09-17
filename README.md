@@ -36,6 +36,26 @@ prinComponents: aqui faremos arquivos de componentes grandes como navbar, main, 
 
 subComponents: aqui faremos componentes menores como botoes, links, inputs e etc. para criar e da mesma forma da prinComponents.
 
+### Pasta Public
+
+Nela guardaremos todas as imagens que forem usadas no projeto.
+
+Para utilizar as imagens nao precisa especificar a pasta public no caminho se nao dara erro.
+
+EXEMPLO
+
+Maneira errada:
+
+```code
+        <Image src="/public/images/logo.png" alt="Background"/>
+```
+
+Maneira correta:
+
+```code
+        <Image src="/images/logo.png" alt="Background"/>
+```
+
 ## Documentacao do NextJS
 
 [Next.js Documentation](https://nextjs.org/docs)

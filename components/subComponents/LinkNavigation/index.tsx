@@ -3,13 +3,15 @@ import React from 'react'
 
 export default function LinkNavigation({
   href,
-  children
+  children,
+  className = ''
 }: {
   href: string
   children: React.ReactNode
+  className?: string
 }) {
   return (
-    <Link href={href} className="text-white hover:underline m-4">
+    <Link href={href} className={`hover:underline ${className}`}>
       {children}
     </Link>
   )

@@ -1,6 +1,7 @@
 'use client'
 import Button from '@/components/subComponents/Button'
 import Input from '@/components/subComponents/Input'
+import LinkNavigation from '@/components/subComponents/LinkNavigation'
 import { ArrowLeft } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -70,9 +71,9 @@ export default function page() {
           <Button>Criar</Button>
           <p className="text-gray-500">
             Já possui uma conta?{' '}
-            <Link href="/Login" className="text-blue-500 hover:underline">
+            <LinkNavigation href="/Login" className="text-blue-500">
               Faça login
-            </Link>
+            </LinkNavigation>
           </p>
         </form>
       </div>

@@ -32,55 +32,37 @@ export default function NavBar() {
         )}
         {menuState && (
           <div className="absolute top-16 left-0 lg:left-5 lg:rounded-lg w-full lg:max-w-fit bg-primary flex flex-col items-start gap-4  z-10">
-            <Link
+            <LinkNavigation
               href="/Login"
-              className="text-white font-bold text-2xl hover:cursor-pointer flex items-center p-2 lg:hidden"
+              className="text-white font-bold text-2xl flex items-center p-2 lg:hidden"
             >
               <User className="text-white m-4 " />
               Olá, Faça seu login
-            </Link>
+            </LinkNavigation>
             <div className="flex flex-col gap-4 w-full lg:rounded-lg bg-white p-4 text-black">
               <h2 className="text-2xl">Minhas Compras</h2>
-              <Link href="/" className="hover:underline">
-                Meus Pedidos
-              </Link>
-              <Link href="/" className="hover:underline">
-                Meus Favoritos
-              </Link>
+              <LinkNavigation href="/">Meus Pedidos</LinkNavigation>
+              <LinkNavigation href="/">Meus Favoritos</LinkNavigation>
 
               <hr className="border-gray-300" />
               <h2 className="text-2xl">Destaques</h2>
-              <Link href="/" className="hover:underline">
-                Mais Alugados
-              </Link>
-              <Link href="/" className="hover:underline">
-                Recomendações
-              </Link>
-              <Link href="/" className="hover:underline">
-                Mais vendidos
-              </Link>
+              <LinkNavigation href="/">Mais Alugados</LinkNavigation>
+              <LinkNavigation href="/">Recomendações</LinkNavigation>
+              <LinkNavigation href="/">Mais vendidos</LinkNavigation>
               <hr className="border-gray-300" />
               <h2 className="text-2xl">Categorias</h2>
-              <Link href="/" className="hover:underline">
-                Ferramentas
-              </Link>
-              <Link href="/" className="hover:underline">
-                Eletrodomésticos
-              </Link>
-              <Link href="/" className="hover:underline">
-                Eletrônicos
-              </Link>
-              <Link href="/" className="hover:underline">
-                Festas e Eventos
-              </Link>
+              <LinkNavigation href="/">Ferramentas</LinkNavigation>
+              <LinkNavigation href="/">Eletrodomésticos</LinkNavigation>
+              <LinkNavigation href="/">Eletrônicos</LinkNavigation>
+              <LinkNavigation href="/">Festas e Eventos</LinkNavigation>
               <hr className="border-gray-300" />
               <h2 className="text-2xl">Ajuda e Configurações</h2>
-              <Link href="/" className="hover:underline">
+              <LinkNavigation href="/" className="">
                 Minha Conta
-              </Link>
-              <Link href="/" className="hover:underline">
+              </LinkNavigation>
+              <LinkNavigation href="/" className="">
                 Ajuda
-              </Link>
+              </LinkNavigation>
             </div>
           </div>
         )}
@@ -98,8 +80,12 @@ export default function NavBar() {
       </span>
 
       <span className="hidden lg:flex items-center sm:pl-12">
-        <LinkNavigation href="/Cadastrar">Crie sua conta</LinkNavigation>
-        <LinkNavigation href="/Login">Entrar</LinkNavigation>
+        <LinkNavigation href="/Cadastrar" className="text-white mr-4">
+          Crie sua conta
+        </LinkNavigation>
+        <LinkNavigation href="/Login" className="text-white">
+          Entrar
+        </LinkNavigation>
         <User className="text-white m-4 hover:cursor-pointer" />
         {cartState ? (
           <ShoppingCart

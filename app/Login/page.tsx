@@ -1,6 +1,7 @@
 'use client'
 import Button from '@/components/subComponents/Button'
 import Input from '@/components/subComponents/Input'
+import LinkNavigation from '@/components/subComponents/LinkNavigation'
 import { ArrowLeft } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -48,16 +49,16 @@ export default function page() {
               placeholder="**********"
               onChange={e => console.log(e.target.value)}
             />
-            <Link href="/" className="text-blue-500 hover:underline font-bold">
+            <LinkNavigation href="/" className="text-blue-500 font-bold">
               Esqueceu a senha?
-            </Link>
+            </LinkNavigation>
           </div>
           <Button>Entrar</Button>
           <p className="text-gray-500">
             Não possui uma conta?{' '}
-            <Link href="/Cadastrar" className="text-blue-500 hover:underline">
+            <LinkNavigation href="/Cadastrar" className="text-blue-500">
               Crie uma conta
-            </Link>
+            </LinkNavigation>
           </p>
         </form>
       </div>

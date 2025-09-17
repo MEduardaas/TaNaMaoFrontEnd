@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "titulo": "Camiseta Básica",
+    "categoria": "Vestuário",
+    "preco": 49.9
+  },
+  {
+    "id": 2,
+    "titulo": "Notebook Gamer",
+    "categoria": "Eletrônicos",
+    "preco": 5899.0
+  },
+  {
+    "id": 3,
+    "titulo": "Fone de Ouvido Bluetooth",
+    "categoria": "Acessórios",
+    "preco": 199.9
+  },
+  {
+    "id": 4,
+    "titulo": "Cafeteira Elétrica",
+    "categoria": "Eletrodomésticos",
+    "preco": 299.0
+  },
+  {
+    "id": 5,
+    "titulo": "Livro: Programação Java",
+    "categoria": "Livros",
+    "preco": 89.9
+  },
+  {
+    "id": 6,
+    "titulo": "Smartphone Android",
+    "categoria": "Eletrônicos",
+    "preco": 2499.0
+  },
+  {
+    "id": 7,
+    "titulo": "Tênis Esportivo",
+    "categoria": "Calçados",
+    "preco": 349.9
+  },
+  {
+    "id": 8,
+    "titulo": "Mochila Executiva",
+    "categoria": "Acessórios",
+    "preco": 179.9
+  },
+  {
+    "id": 9,
+    "titulo": "Relógio de Pulso",
+    "categoria": "Acessórios",
+    "preco": 599.0
+  },
+  {
+    "id": 10,
+    "titulo": "Console de Videogame",
+    "categoria": "Eletrônicos",
+    "preco": 3999.0
+  }
+]

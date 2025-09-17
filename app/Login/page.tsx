@@ -25,7 +25,7 @@ export default function page() {
       </div>
       <div
         id="right"
-        className="relative bg-white h-full w-full xl:w-1/2 flex justify-center items-center py-5 px-2"
+        className="relative bg-background h-full w-full xl:w-1/2 flex justify-center items-center py-5 px-2"
       >
         <Link
           href="/"

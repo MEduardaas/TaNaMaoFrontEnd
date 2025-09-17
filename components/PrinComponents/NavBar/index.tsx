@@ -72,9 +72,9 @@ export default function NavBar() {
         <input
           type="text"
           placeholder='O que você está procurando? Ex: "Parafusadeira 3/4"'
-          className="bg-white placeholder-gray-500 text-black rounded-l-2xl  w-full  h-7 border-white focus:outline-none pl-4"
+          className="bg-background placeholder-gray-500 text-black rounded-l-2xl  w-full  h-7 border-white focus:outline-none pl-4"
         />
-        <div className="bg-white rounded-r-2xl h-7 hover:cursor-pointer flex items-center justify-center pr-3">
+        <div className="bg-background rounded-r-2xl h-7 hover:cursor-pointer flex items-center justify-center pr-3">
           <Search className=" text-black  " />
         </div>
       </span>

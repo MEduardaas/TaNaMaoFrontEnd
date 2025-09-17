@@ -12,7 +12,7 @@ export default function Input({
       type={type}
       placeholder={placeholder}
       onChange={onChange}
-      className="border border-gray-300 text-black placeholder-gray-300 bg-transparent p-2 rounded w-full"
+      className="border border-gray-300 text-black placeholder-gray-300 bg-transparent p-2 rounded-xl w-full"
     />
   )
 }

@@ -15,6 +15,7 @@ import { useState } from 'react'
 
 export default function Home() {
   const [menuState, setMenuState] = useState(false)
+  const [cartState, setCartState] = useState(false)
 
   return (
     <div className="flex flex-col min-h-screen gap-16">
@@ -102,9 +103,30 @@ export default function Home() {
           <LinkNavigation href="/Cadastrar">Crie sua conta</LinkNavigation>
           <LinkNavigation href="/Login">Entrar</LinkNavigation>
           <User className="text-white m-4 hover:cursor-pointer" />
-          <ShoppingCart className="text-white m-4 hover:cursor-pointer" />
+          {cartState ? (
+            <ShoppingCart
+              className="text-white m-4 hover:cursor-pointer "
+              onClick={() => setCartState(!cartState)}
+            />
+          ) : (
+            <ShoppingCart
+              className="text-white m-4 hover:cursor-pointer "
+              onClick={() => setCartState(!cartState)}
+            />
+          )}
           <Heart className="text-white m-4 hover:cursor-pointer" />
           <CirclePlus className="text-white m-4 hover:cursor-pointer" />
+          {cartState && (
+            <div className="absolute top-16 right-0 lg:right-5 lg:rounded-lg w-full lg:max-w-fit bg-white flex flex-col items-start gap-4  z-10">
+              <div className="flex flex-col gap-4 w-full lg:rounded-lg bg-white p-4 text-black">
+                <h2 className="text-2xl">Meu Carrinho</h2>
+                <hr className="border-gray-300" />
+                <ul>
+                  <li>Seu carrinho está vazio</li>
+                </ul>
+              </div>
+            </div>
+          )}
         </span>
       </nav>
     </div>

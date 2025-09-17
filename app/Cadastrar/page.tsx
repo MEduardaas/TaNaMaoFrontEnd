@@ -1,6 +1,6 @@
 'use client'
-import Button from '@/components/Button'
-import Input from '@/components/Input'
+import Button from '@/components/subComponents/Button'
+import Input from '@/components/subComponents/Input'
 import { ArrowLeft } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'

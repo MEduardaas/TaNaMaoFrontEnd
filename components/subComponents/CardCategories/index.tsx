@@ -1,24 +1,55 @@
-import Image from 'next/image'
-import React from 'react'
+import {
+  Armchair,
+  Baby,
+  BookOpen,
+  BriefcaseBusiness,
+  CarFront,
+  Gamepad2,
+  Hammer,
+  RefreshCwOff,
+  Smartphone
+} from 'lucide-react'
+import Link from 'next/link'
 
-export default function CardCategories({
-  title,
-  price
-}: {
-  title: string
-  price: number
-}) {
+export default function CardCategories({ title }: { title: string }) {
+  let icon = null
+  switch (title) {
+    case 'Móveis':
+      icon = <Armchair className="w-10 h-10" />
+      break
+    case 'Eletrônicos':
+      icon = <Smartphone className="w-10 h-10" />
+      break
+    case 'Livros':
+      icon = <BookOpen className="w-10 h-10" />
+      break
+    case 'Ferramentas':
+      icon = <Hammer className="w-10 h-10" />
+      break
+    case 'Serviços':
+      icon = <BriefcaseBusiness className="w-10 h-10" />
+      break
+    case 'Jogos':
+      icon = <Gamepad2 className="w-10 h-10" />
+      break
+    case 'Brinquedos':
+      icon = <Baby className="w-10 h-10" />
+      break
+    case 'Automóveis':
+      icon = <CarFront className="w-10 h-10" />
+      break
+    default:
+      icon = <RefreshCwOff className="w-10 h-10" />
+      break
+  }
+
   return (
-    <div className="flex flex-col items-start gap-2 border-gray-300 border-2 p-4 rounded-lg max-w-max">
-      <Image
-        src="/images/logo.png"
-        alt="Categorias"
-        width={200}
-        height={200}
-        className="rounded-lg shadow-md"
-      />
+    <Link
+      href={`/categories/${title}`}
+      className="flex flex-col items-center gap-2  p-4 rounded-lg max-w-max"
+    >
+      <div className="bg-primary p-6 rounded-full text-white">{icon}</div>
       <h4>{title}</h4>
-      <p className="font-bold">${price}</p>
-    </div>
+    </Link>
   )
 }

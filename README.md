@@ -27,3 +27,7 @@ O projeto estara aberto no seguinte link [http://localhost:3000](http://localhos
 ## Documentacao do Tailwind CSS
 
 [Tailwind Documentation](https://tailwindcss.com/docs/installation/using-vite)
+
+## Documentacao dos icones Lucide
+
+[Lucide Documentation](https://lucide.dev/guide/)

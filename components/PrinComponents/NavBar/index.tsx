@@ -17,7 +17,7 @@ export default function NavBar() {
   const [menuState, setMenuState] = useState(false)
   const [cartState, setCartState] = useState(false)
   return (
-    <nav className="bg-primary w-full h-16 flex items-center justify-between pr-4 lg:px-18">
+    <nav className="fixed top-0 bg-primary w-full h-16 flex items-center justify-between pr-4 lg:px-18">
       <span className="flex items-center ">
         {menuState ? (
           <X

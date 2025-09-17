@@ -56,6 +56,14 @@ Maneira correta:
         <Image src="/images/logo.png" alt="Background"/>
 ```
 
+## Pasta Lib
+
+Nela esta o arquivo api.ts que sera o responsavel por criar uma padronizacao para requisicoes HTTPS para o BackEnd.
+
+## Pasta Hooks
+
+Aqui podemos criar novos hooks do React que sao funcoes definidas e prontas para serem chamadas.
+
 ## Documentacao do NextJS
 
 [Next.js Documentation](https://nextjs.org/docs)

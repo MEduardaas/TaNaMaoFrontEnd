@@ -28,26 +28,14 @@ export default function page() {
       >
         <Link
           href="/"
-          className="absolute top-10 sm:top-4 left-4 z-50 bg-black text-white p-2 rounded-full shadow"
+          className="absolute top-4 left-4 z-50 bg-black text-white p-2 rounded-full shadow"
           aria-label="Voltar"
         >
           <ArrowLeft />
         </Link>
         <form className="h-min p-10 pb-4  w-full max-w-96 flex flex-col justify-center items-center mx-auto gap-4 text-black border-2 border-gray-300 rounded-lg shadow-lg">
-          <h1 className="text-4xl  font-light mb-4">Registrar</h1>
+          <h1 className="text-4xl  font-light mb-4">Entrar</h1>
           <div className="w-full flex justify-center items-start flex-col gap-2">
-            <label htmlFor="name">Nome</label>
-            <Input
-              type="text"
-              placeholder="Nome Completo"
-              onChange={e => console.log(e.target.value)}
-            />
-            <label htmlFor="cpf">CPF</label>
-            <Input
-              type="text"
-              placeholder="123.456.789-00"
-              onChange={e => console.log(e.target.value)}
-            />
             <label htmlFor="email">Email</label>
             <Input
               type="email"
@@ -60,18 +48,15 @@ export default function page() {
               placeholder="**********"
               onChange={e => console.log(e.target.value)}
             />
-            <label htmlFor="password">Confirmar Senha</label>
-            <Input
-              type="password"
-              placeholder="**********"
-              onChange={e => console.log(e.target.value)}
-            />
+            <Link href="/" className="text-blue-500 hover:underline font-bold">
+              Esqueceu a senha?
+            </Link>
           </div>
-          <Button>Criar</Button>
+          <Button>Entrar</Button>
           <p className="text-gray-500">
-            Já possui uma conta?{' '}
-            <Link href="/Login" className="text-blue-500 hover:underline">
-              Faça login
+            Não possui uma conta?{' '}
+            <Link href="/Cadastrar" className="text-blue-500 hover:underline">
+              Crie uma conta
             </Link>
           </p>
         </form>

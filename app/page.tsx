@@ -30,7 +30,7 @@ export default function Home() {
 
         <span className="flex items-center sm:pl-12">
           <LinkNavigation href="/Cadastrar">Crie sua conta</LinkNavigation>
-          <LinkNavigation href="/login">Entrar</LinkNavigation>
+          <LinkNavigation href="/Login">Entrar</LinkNavigation>
           <User className="text-white m-4 hover:cursor-pointer" />
           <ShoppingCart className="text-white m-4 hover:cursor-pointer" />
           <Heart className="text-white m-4 hover:cursor-pointer" />

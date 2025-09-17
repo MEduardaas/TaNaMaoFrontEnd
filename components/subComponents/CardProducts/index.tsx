@@ -4,15 +4,17 @@ import React from 'react'
 
 export default function CardProducts({
   title,
+  category,
   price
 }: {
   title: string
+  category: string
   price: number
 }) {
   return (
     <Link
       href={`/products/${title}`}
-      className="flex flex-col items-start gap-2 border-gray-300 border-2 p-4 rounded-lg max-w-max"
+      className="flex flex-col items-start gap-2 border-gray-300 border-2 p-4 rounded-lg max-w-max min-h-max"
     >
       <Image
         src="/images/logo.png"
@@ -22,6 +24,7 @@ export default function CardProducts({
         className="rounded-lg shadow-md"
       />
       <h4>{title}</h4>
+      <p className="text-gray-500">{category}</p>
       <p className="font-bold">${price}</p>
     </Link>
   )

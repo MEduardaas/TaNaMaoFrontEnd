@@ -17,7 +17,7 @@ export default function NavBar() {
   const [menuState, setMenuState] = useState(false)
   const [cartState, setCartState] = useState(false)
   return (
-    <nav className="fixed top-0 bg-primary w-full h-16 flex items-center justify-between pr-4 lg:px-18">
+    <nav className="absolute top-0 bg-primary w-full h-16 flex items-center justify-between pr-4 lg:px-18">
       <span className="flex items-center ">
         {menuState ? (
           <X
@@ -99,7 +99,9 @@ export default function NavBar() {
           />
         )}
         <Heart className="text-white m-4 hover:cursor-pointer" />
-        <CirclePlus className="text-white m-4 hover:cursor-pointer" />
+        <LinkNavigation href='/CriarProduto'>
+          <CirclePlus className="text-white m-4 hover:cursor-pointer" />
+        </LinkNavigation>
         {cartState && (
           <div className="absolute top-16 right-0 lg:right-5 lg:rounded-lg w-full lg:max-w-fit bg-white flex flex-col items-start gap-4  z-10">
             <div className="flex flex-col gap-4 w-full lg:rounded-lg bg-white p-4 text-black">

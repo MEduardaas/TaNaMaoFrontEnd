@@ -20,9 +20,10 @@ export default function Home() {
     <div className="flex flex-col h-full gap-16">
       <NavBar />
 
-      <main className="mx-2 md:mx-15">
+      <main className="mx-2 md:mx-15 ">
         {/* Carrossel de Categorias */}
-        <div id="categories" className="mb-10">
+        <div id="categories" className="mb-10 flex flex-col gap-5">
+          <h2 className="md:pl-12 text-2xl">Categorias</h2>
           <Carousel
             value={[
               { title: 'Móveis' },
@@ -54,7 +55,8 @@ export default function Home() {
         </div>
 
         {/* Carrossel de Produtos */}
-        <div id="products" className="mb-10">
+        <div id="products" className="mb-10 flex flex-col gap-5">
+          <h2 className="md:pl-12 text-2xl">Mais Vendidos</h2>
           <Carousel
             value={produtosTeste}
             numVisible={6}
@@ -83,7 +85,8 @@ export default function Home() {
           />
         </div>
         {/* Carrossel de Produtos */}
-        <div id="products" className="mb-10">
+        <div id="products" className="mb-10 flex flex-col gap-5">
+          <h2 className="md:pl-12 text-2xl">Bem Avaliados</h2>
           <Carousel
             value={produtosTeste}
             numVisible={6}

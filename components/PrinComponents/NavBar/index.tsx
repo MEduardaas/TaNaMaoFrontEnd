@@ -86,9 +86,11 @@ export default function NavBar() {
         <LinkNavigation href="/Login" className="text-white">
           Entrar
         </LinkNavigation>
+
         <LinkNavigation href="/Perfil" className="">
           <User className="text-white m-4 hover:cursor-pointer" />
         </LinkNavigation>
+        
         {cartState ? (
           <ShoppingCart
             className="text-white m-4 hover:cursor-pointer "

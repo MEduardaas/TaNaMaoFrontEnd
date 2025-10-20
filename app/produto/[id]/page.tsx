@@ -2,6 +2,7 @@ import NavBar from '@/components/PrinComponents/NavBar'
 import Footer from '@/components/PrinComponents/Footer'
 import { produtosTeste } from '@/db/apiTest'
 import { notFound } from 'next/navigation'
+import Button from '@/components/subComponents/Button'
 
 type Props = {
   params: { id: string }
@@ -9,7 +10,7 @@ type Props = {
 
 export default function ProdutoDetalhe({ params }: Props) {
   const id = Number(params.id)
-  const produto = produtosTeste.find((p) => Number(p.id) === id)
+  const produto = produtosTeste.find(p => Number(p.id) === id)
 
   if (!produto) return notFound()
 
@@ -23,12 +24,32 @@ export default function ProdutoDetalhe({ params }: Props) {
             <span className="text-gray-500">Imagem do produto</span>
           </div>
 
-          <div>
-            <h1 className="text-2xl font-bold mb-2">{produto.titulo}</h1>
-            <p className="text-sm text-gray-600 mb-4">Categoria: {produto.categoria}</p>
-            <p className="text-xl font-semibold mb-6">R$ {produto.preco.toFixed(2)}</p>
+          <div className="w-full">
+            <div className="w-1/2">
+              <h1 className="text-2xl font-bold mb-2">{produto.titulo}</h1>
+              <p className="bg-green-200 text-green-900 rounded-md max-w-max p-2 text-sm text-gray-600 mb-2">
+                {produto.categoria}
+              </p>
+              <p>Quantidade Disponiveis: {produto.quantidade}</p>
+              <h2 className="text-xl font-bold">Preço de Compra</h2>
+              <p className="text-xl font-bold mb-2">
+                R$ {produto.precoCompra.toFixed(2)}
+              </p>
+              <Button>Adicionar ao Carrinho</Button>
 
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-md">Comprar</button>
+              <h2 className="text-xl font-bold mt-4">Preço de Aluguel</h2>
+              <p className="text-xl font-bold mb-2">
+                R$ {produto.precoAluguel.toFixed(2)}
+              </p>
+
+              <Button>Alugar</Button>
+            </div>
+            <div className="w-full border-2 border-gray-300 rounded-lg p-5 mt-6">
+              <h1 className="text-lg font-bold">Descrição</h1>
+              <ul>
+                <li>{produto.descricao}</li>
+              </ul>
+            </div>
           </div>
         </div>
       </main>

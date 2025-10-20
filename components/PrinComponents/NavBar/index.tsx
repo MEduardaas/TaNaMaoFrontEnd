@@ -10,6 +10,7 @@ import {
   User,
   X
 } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -66,7 +67,10 @@ export default function NavBar() {
             </div>
           </div>
         )}
-        <MapPin className="text-white m-4 hover:cursor-pointer" />
+        <MapPin className="text-white m-4 mr-5 hover:cursor-pointer" />
+        <Link href="/">
+          <Image src="/images/logo.png" alt="Logo" width={70} height={40} />
+        </Link>
       </span>
       <span className="flex items-center max-w-2xl w-full">
         <input

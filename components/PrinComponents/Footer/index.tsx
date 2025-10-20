@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function Footer() {
   return (
-    <footer className="relative bottom-0 bg-primary text-white w-full max-h-max flex items-start gap-20 p-8 pb-15 lg:px-18">
+    <footer className="bg-primary text-white w-full max-h-max flex items-start gap-20 p-8 pb-15 lg:px-18">
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full">
         <div className="flex flex-col gap-2">
           <h5 className="mb-4 font-bold">Atendimento ao Cliente</h5>

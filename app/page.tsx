@@ -17,12 +17,11 @@ type Produto = {
 
 export default function Home() {
   return (
-
-    <div className="flex flex-col h-full gap-16 mt-20">
+    <div className="flex flex-col h-full gap-16">
       <NavBar />
 
       {/* Carrossel de Categorias */}
-      <div id="categories" className="mb-10 mt-20">
+      <div id="categories" className="mb-10  h-full">
         <Glider
           draggable
           hasArrows

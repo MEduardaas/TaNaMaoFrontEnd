@@ -8,7 +8,7 @@ export default function page() {
     return(<div className="flex flex-col h-full gap-16">
         <NavBar />
         <div className="flex gap-8 mt-24 font-bold items-center justify-center">
-            <form className="flex flex-col gap-4 border-2 border-gray-300 rounded-lg p-10 text-lg">
+            <form className="flex flex-col gap-4 border-2 border-gray-300 rounded-lg p-10 ">
                 <h1 className="text-4xl">Criação de Produto</h1>
                 <p className="text-xl text-gray-600 ">Preencha os campos com as  informações do seu produto. </p>
 
@@ -51,6 +51,8 @@ export default function page() {
                 </div>
             </form>
         </div>
-        <Footer />
-    </div>)
+          <Footer/>
+    </div>
+  
+    )
 }

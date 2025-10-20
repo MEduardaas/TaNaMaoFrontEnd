@@ -3,17 +3,19 @@ import Link from 'next/link'
 import React from 'react'
 
 export default function CardProducts({
+  id,
   title,
   category,
   price
 }: {
+  id: number | string
   title: string
   category: string
   price: number
 }) {
   return (
     <Link
-      href={`/products/${title}`}
+      href={`/produto/${id}`}
       className="flex flex-col items-start gap-2 border-gray-300 border-2 p-4 rounded-lg max-w-max min-h-max"
     >
       <Image

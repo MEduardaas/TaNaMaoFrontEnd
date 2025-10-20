@@ -45,7 +45,7 @@ export default function CardCategories({ title }: { title: string }) {
 
   return (
     <Link
-      href={`/categories/${title}`}
+      href={{ pathname: '/produtos', query: { categoria: title } }}
       className="flex flex-col items-center gap-2  p-4 rounded-lg max-w-max"
     >
       <div className="bg-primary p-6 rounded-full text-white">{icon}</div>

@@ -57,6 +57,7 @@ export default function Home() {
           {produtosTeste.map((produto: Produto) => (
             <CardProducts
               key={produto.id}
+              id={produto.id}
               title={produto.titulo}
               category={produto.categoria}
               price={produto.preco}

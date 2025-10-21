@@ -3,12 +3,26 @@
 import Footer from '@/components/PrinComponents/Footer'
 import NavBar from '@/components/PrinComponents/NavBar'
 import CardPerfil from '@/components/subComponents/CardPerfil'
+import { useAuth } from '@/hooks/useAuth'
+import { apiRequest } from '@/lib/api'
+import Image from 'next/image'
 
-import 'glider-js/glider.min.css'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function Page() {
+  useAuth()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [user, setUser] = useState<any | null>(null)
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await apiRequest('/perfil', 'GET')
+      setUser(res.user)
+    }
+    fetchUser()
+  }, [])
+
   return (
     <div className="flex flex-col h-full gap-16">
       <NavBar />
@@ -16,8 +30,10 @@ export default function Page() {
         <img src="/images/avatar.png" alt="User Avatar" />
 
         <div className="flex justify-center mb-5 flex-col ">
-          <h1 className="text-2xl font-bold mb-5">Nome</h1>
-          <p>Email: usuario@example.com</p>
+          <h1 className="text-2xl font-bold mb-5">
+            {user ? user.nome : 'Usuário'}
+          </h1>
+          <p>Email: {user ? user.email : 'Email'}</p>
         </div>
       </div>
 

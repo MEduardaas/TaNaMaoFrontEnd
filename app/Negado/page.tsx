@@ -17,7 +17,7 @@ export default function Page() {
         <p className="text-sm text-black py-8 ">
           Você não tem permissão para acessar esta página.
         </p>
-        <LinkNavigation href="/Login">
+        <LinkNavigation href="/Login" className="mb-10">
           <Button>Voltar para o Login</Button>
         </LinkNavigation>
       </div>

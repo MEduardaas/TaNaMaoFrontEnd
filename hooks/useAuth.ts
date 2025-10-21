@@ -7,7 +7,7 @@ export function useAuth() {
   useEffect(() => {
     const token = localStorage.getItem('token')
     if (!token) {
-      router.push('/denied')
+      router.push('/Negado')
     }
   }, [router])
 }

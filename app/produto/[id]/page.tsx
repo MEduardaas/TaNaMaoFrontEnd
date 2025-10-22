@@ -1,18 +1,25 @@
+'use client'
 import NavBar from '@/components/PrinComponents/NavBar'
 import Footer from '@/components/PrinComponents/Footer'
-import { produtosTeste } from '@/db/apiTest'
 import { notFound } from 'next/navigation'
 import Button from '@/components/subComponents/Button'
+import { useEffect, useState } from 'react'
+import { apiRequest } from '@/lib/api'
 
 type Props = {
   params: { id: string }
 }
 
 export default function ProdutoDetalhe({ params }: Props) {
-  const id = Number(params.id)
-  const produto = produtosTeste.find(p => Number(p.id) === id)
+  const [produto, setProduto] = useState<any>({})
 
-  if (!produto) return notFound()
+  useEffect(() => {
+    const fetchProduto = async () => {
+      const response = await apiRequest(`/produtos/${params.id}`, 'GET')
+      setProduto(response.produto)
+    }
+    fetchProduto()
+  }, [])
 
   return (
     <div className="min-h-screen flex flex-col gap-8">
@@ -21,25 +28,27 @@ export default function ProdutoDetalhe({ params }: Props) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-gray-100 rounded-md h-80 flex items-center justify-center">
             {/* Placeholder imagem */}
-            <span className="text-gray-500">Imagem do produto</span>
+            <img
+              src={produto.imagemUrl}
+              alt={produto.nome}
+              className="h-full object-contain"
+            />
           </div>
 
           <div className="w-full">
             <div className="w-1/2">
-              <h1 className="text-2xl font-bold mb-2">{produto.titulo}</h1>
+              <h1 className="text-2xl font-bold mb-2">{produto.nome}</h1>
               <p className="bg-green-200 text-green-900 rounded-md max-w-max p-2 text-sm text-gray-600 mb-2">
                 {produto.categoria}
               </p>
               <p>Quantidade Disponiveis: {produto.quantidade}</p>
               <h2 className="text-xl font-bold">Preço de Compra</h2>
-              <p className="text-xl font-bold mb-2">
-                R$ {produto.precoCompra.toFixed(2)}
-              </p>
+              <p className="text-xl font-bold mb-2">R$ {produto.precoCompra}</p>
               <Button>Adicionar ao Carrinho</Button>
 
               <h2 className="text-xl font-bold mt-4">Preço de Aluguel</h2>
               <p className="text-xl font-bold mb-2">
-                R$ {produto.precoAluguel.toFixed(2)}
+                R$ {produto.precoAluguel}
               </p>
 
               <Button>Alugar</Button>

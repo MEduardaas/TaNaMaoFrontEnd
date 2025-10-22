@@ -7,15 +7,24 @@ import CardProducts from '@/components/subComponents/CardProducts'
 import { produtosTeste } from '../db/apiTest'
 
 import { Carousel } from 'primereact/carousel'
-
-type Produto = {
-  id: string | number
-  titulo: string
-  categoria: string
-  preco: number
-}
+import { useEffect, useState } from 'react'
+import { apiRequest } from '@/lib/api'
 
 export default function Home() {
+  const [produtos, setProdutos] = useState<any[]>([])
+
+  useEffect(() => {
+    // Simulando uma chamada à API para buscar produtos
+    const fetchProdutos = async () => {
+      const response = await apiRequest('/', 'GET')
+      setProdutos(response.produtos)
+    }
+
+    fetchProdutos()
+  }, [])
+
+  console.log(produtos)
+
   return (
     <div className="flex flex-col h-full gap-16">
       <NavBar />
@@ -70,15 +79,21 @@ export default function Home() {
             ]}
             className="custom-carousel"
             circular
-            itemTemplate={(product: Produto) => (
+            itemTemplate={() => (
               <div className="px-2 flex justify-center">
                 <div className="w-full max-w-[260px]">
-                  <CardProducts
-                    id={product.id}
-                    title={product.titulo}
-                    category={product.categoria}
-                    price={product.preco}
-                  />
+                  {produtos.map(product => (
+                    <CardProducts
+                      key={product._id}
+                      id={product._id}
+                      title={product.nome}
+                      category={product.categoria}
+                      precoCompra={product.precoCompra}
+                      precoAluguel={product.precoAluguel}
+                      quantidadeVendida={product.quantidadeVendida}
+                      imagemUrl={product.imagemUrl}
+                    />
+                  ))}
                 </div>
               </div>
             )}
@@ -100,15 +115,21 @@ export default function Home() {
             ]}
             className="custom-carousel"
             circular
-            itemTemplate={(product: Produto) => (
+            itemTemplate={() => (
               <div className="px-2 flex justify-center">
                 <div className="w-full max-w-[260px]">
-                  <CardProducts
-                    id={product.id}
-                    title={product.titulo}
-                    category={product.categoria}
-                    price={product.preco}
-                  />
+                  {produtos.map(product => (
+                    <CardProducts
+                      key={product._id}
+                      id={product._id}
+                      title={product.nome}
+                      category={product.categoria}
+                      precoCompra={product.precoCompra}
+                      precoAluguel={product.precoAluguel}
+                      quantidadeVendida={product.quantidadeVendida}
+                      imagemUrl={product.imagemUrl}
+                    />
+                  ))}
                 </div>
               </div>
             )}

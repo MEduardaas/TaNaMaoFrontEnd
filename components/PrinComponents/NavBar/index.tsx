@@ -17,9 +17,14 @@ import { useState } from 'react'
 export default function NavBar() {
   const [menuState, setMenuState] = useState(false)
   const [cartState, setCartState] = useState(false)
+  const [isLogged, setIsLogged] = useState(false)
+
   return (
-    <nav className=" bg-primary w-full h-16 flex items-center justify-between pr-4 mb-4 lg:px-18">
+    <nav className=" bg-primary w-full h-16 flex items-center justify-between px-2 mb-4 lg:px-18">
       <span className="flex items-center ">
+        <Link href="/">
+          <Image src="/images/logo.png" alt="Logo" width={70} height={40} />
+        </Link>
         {menuState ? (
           <X
             className="text-white m-4 hover:cursor-pointer "
@@ -67,10 +72,6 @@ export default function NavBar() {
             </div>
           </div>
         )}
-        <MapPin className="text-white m-4 mr-5 hover:cursor-pointer" />
-        <Link href="/">
-          <Image src="/images/logo.png" alt="Logo" width={70} height={40} />
-        </Link>
       </span>
       <span className="flex items-center max-w-2xl w-full">
         <input
@@ -84,12 +85,16 @@ export default function NavBar() {
       </span>
 
       <span className="hidden lg:flex items-center sm:pl-12">
-        <LinkNavigation href="/Cadastrar" className="text-white mr-4">
-          Crie sua conta
-        </LinkNavigation>
-        <LinkNavigation href="/Login" className="text-white">
-          Entrar
-        </LinkNavigation>
+        {!isLogged && (
+          <>
+            <LinkNavigation href="/Cadastrar" className="text-white mr-4">
+              Crie sua conta
+            </LinkNavigation>
+            <LinkNavigation href="/Login" className="text-white">
+              Entrar
+            </LinkNavigation>
+          </>
+        )}
 
         <LinkNavigation href="/Perfil" className="">
           <User className="text-white m-4 hover:cursor-pointer" />

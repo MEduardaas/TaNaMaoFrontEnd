@@ -10,7 +10,9 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 
 export default function page() {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [form, setForm] = useState({ email: '', senha: '' })
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [message, setMessage] = useState('')
 
   async function handleSubmit(e: React.FormEvent) {

@@ -5,9 +5,10 @@ export function useAuth() {
   const router = useRouter()
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
     const token = localStorage.getItem('token')
     if (!token) {
-      router.push('/Negado')
+      router.replace('/Negado')
     }
   }, [router])
 }

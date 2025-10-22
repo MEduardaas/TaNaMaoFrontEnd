@@ -27,14 +27,12 @@ export default function Page() {
 
       <div className="flex justify-center gap-20 mb-20">
         <div> 
-       
           <CardPerfil
-           
           title="Minhas Informações"
           description="Informações pessoais como nome, telefone e endereço."
         />
 
-      <LinkNavigation href="/Categories/DadosDaConta" >
+      <LinkNavigation href="/DadosDaConta" >
       <CardPerfil
         title="Dados da Conta"
         description="Dados que representam a conta no TaNaMao."/>
@@ -43,16 +41,16 @@ export default function Page() {
 
       <div>
 
-        <LinkNavigation href="/Categories/Seguranca" >
+        <LinkNavigation href="/Seguranca" >
           <CardPerfil
-        title="Segurança"
+        title="Seguranca"
         description="Configure suas preferências de segurança."
         />
         </LinkNavigation>
 
-      <LinkNavigation href="/Categories/Historico">
+      <LinkNavigation href="/Historico">
         <CardPerfil
-          title="Histórico"
+          title="Historico"
           description="Endereços salvos na sua conta."/>
           </LinkNavigation>
         </div>

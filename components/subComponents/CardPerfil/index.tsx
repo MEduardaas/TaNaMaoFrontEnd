@@ -29,7 +29,7 @@ export default function CardPerfil({ title, description }: { title: string, desc
 
   return (
     <Link
-      href={`/categories/${title}`}
+      href={`${title}`}
       className="flex flex-col items-center gap-2  p-4 rounded-lg max-w-max"
     >
       <div className="bg-white shadow-lg rounded-lg p-6 transform transition-all duration-500 hover:scale-105 flex items-start gap-4 w-134 h-40">

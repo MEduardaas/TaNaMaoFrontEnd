@@ -8,7 +8,8 @@ import { useState } from 'react'
 import Input from '@/components/subComponents/Input'
 import Button from '@/components/subComponents/Button'
 
-export default function Page() {return (
+export default function Page() {
+  return (
   <div className="flex flex-col h-full gap-18">
       <NavBar />
       <main className="mx-auto w-full max-w-7xl px-4 ">

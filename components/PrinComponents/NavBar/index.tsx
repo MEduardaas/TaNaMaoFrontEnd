@@ -10,6 +10,7 @@ import {
   User,
   X
 } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -66,15 +67,18 @@ export default function NavBar() {
             </div>
           </div>
         )}
-        <MapPin className="text-white m-4 hover:cursor-pointer" />
+        <MapPin className="text-white m-4 mr-5 hover:cursor-pointer" />
+        <Link href="/">
+          <Image src="/images/logo.png" alt="Logo" width={70} height={40} />
+        </Link>
       </span>
       <span className="flex items-center max-w-2xl w-full">
         <input
           type="text"
           placeholder='O que você está procurando? Ex: "Parafusadeira 3/4"'
-          className="bg-background placeholder-gray-500 text-black rounded-l-2xl  w-full  h-7 border-white focus:outline-none pl-4"
+          className="bg-background placeholder-gray-500 text-black rounded-l-2xl  w-full  h-8 border-white focus:outline-none pl-4"
         />
-        <div className="bg-background rounded-r-2xl h-7 hover:cursor-pointer flex items-center justify-center pr-3">
+        <div className="bg-background rounded-r-2xl h-8 hover:cursor-pointer flex items-center justify-center pr-3">
           <Search className=" text-black  " />
         </div>
       </span>
@@ -90,7 +94,7 @@ export default function NavBar() {
         <LinkNavigation href="/Perfil" className="">
           <User className="text-white m-4 hover:cursor-pointer" />
         </LinkNavigation>
-        
+
         {cartState ? (
           <ShoppingCart
             className="text-white m-4 hover:cursor-pointer "

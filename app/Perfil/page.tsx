@@ -3,63 +3,55 @@
 import Footer from '@/components/PrinComponents/Footer'
 import NavBar from '@/components/PrinComponents/NavBar'
 import CardPerfil from '@/components/subComponents/CardPerfil'
-import LinkNavigation from '@/components/subComponents/LinkNavigation'
 
 import 'glider-js/glider.min.css'
-import { History, IdCard , Lock, User, } from 'lucide-react'
+import Link from 'next/link'
 import React from 'react'
 
 export default function Page() {
   return (
-   
-    <div className="flex flex-col h-full gap-16 mt-20">
+    <div className="flex flex-col h-full gap-16">
       <NavBar />
-      <div className="flex justify-start items-center mt-10 gap-5 ml-32">
-
+      <div className="flex justify-start items-center gap-5 ml-32">
         <img src="/images/avatar.png" alt="User Avatar" />
 
         <div className="flex justify-center mb-5 flex-col ">
-            <h1 className="text-2xl font-bold mb-5">Nome</h1>
-            <p>Email: usuario@example.com</p>
+          <h1 className="text-2xl font-bold mb-5">Nome</h1>
+          <p>Email: usuario@example.com</p>
         </div>
-
       </div>
 
-      <div className="flex justify-center gap-20 mb-20">
-        <div> 
-       
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 w-full px-32">
+        <Link href="/MinhasInformacoes">
           <CardPerfil
-           
-          title="Minhas Informações"
-          description="Informações pessoais como nome, telefone e endereço."
-        />
+            title="Minhas Informações"
+            description="Informações pessoais como nome, telefone e endereço."
+          />
+        </Link>
 
-      <LinkNavigation href="/Categories/DadosDaConta" >
-      <CardPerfil
-        title="Dados da Conta"
-        description="Dados que representam a conta no TaNaMao."/>
-      </LinkNavigation>
+        <Link href="/DadosDaConta">
+          <CardPerfil
+            title="Dados da Conta"
+            description="Dados que representam a conta no TaNaMao."
+          />
+        </Link>
+
+        <Link href="/Seguranca">
+          <CardPerfil
+            title="Segurança"
+            description="Configure suas preferências de segurança."
+          />
+        </Link>
+
+        <Link href="/Historico">
+          <CardPerfil
+            title="Histórico"
+            description="Endereços salvos na sua conta."
+          />
+        </Link>
       </div>
 
-      <div>
-
-        <LinkNavigation href="/Categories/Seguranca" >
-          <CardPerfil
-        title="Segurança"
-        description="Configure suas preferências de segurança."
-        />
-        </LinkNavigation>
-
-      <LinkNavigation href="/Categories/Historico">
-        <CardPerfil
-          title="Histórico"
-          description="Endereços salvos na sua conta."/>
-          </LinkNavigation>
-        </div>
-        
-        </div>
-    
-    <Footer />
+      <Footer />
     </div>
   )
 }

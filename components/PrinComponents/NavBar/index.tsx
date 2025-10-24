@@ -71,7 +71,10 @@ export default function NavBar() {
                 Ajuda
               </LinkNavigation>
               {isLogged && (
-                <button className="" onClick={logout}>
+                <button
+                  className="bg-red-500 border-2 font-bold border-red-500 w-full text-white p-2 rounded-xl cursor-pointer hover:bg-white hover:text-red-500 transition-colors"
+                  onClick={logout}
+                >
                   Deslogar
                 </button>
               )}

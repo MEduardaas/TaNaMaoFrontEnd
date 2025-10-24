@@ -4,7 +4,6 @@ import Footer from '@/components/PrinComponents/Footer'
 import NavBar from '@/components/PrinComponents/NavBar'
 import CardCategories from '@/components/subComponents/CardCategories'
 import CardProducts from '@/components/subComponents/CardProducts'
-import { produtosTeste } from '../db/apiTest'
 
 import { Carousel } from 'primereact/carousel'
 import { useEffect, useState } from 'react'
@@ -26,7 +25,7 @@ export default function Home() {
   console.log(produtos)
 
   return (
-    <div className="flex flex-col h-full gap-16">
+    <div className="flex flex-col h-full gap-5">
       <NavBar />
 
       <main className="mx-2 md:mx-15 ">
@@ -67,7 +66,7 @@ export default function Home() {
         <div id="products" className="mb-10 flex flex-col gap-5">
           <h2 className="md:pl-12 text-2xl">Mais Vendidos</h2>
           <Carousel
-            value={produtosTeste}
+            value={produtos}
             numVisible={6}
             numScroll={1}
             responsiveOptions={[
@@ -88,8 +87,8 @@ export default function Home() {
                       id={product._id}
                       title={product.nome}
                       category={product.categoria}
-                      precoCompra={product.precoCompra}
-                      precoAluguel={product.precoAluguel}
+                      tipoVenda={product.tipoVenda}
+                      preco={product.preco}
                       quantidadeVendida={product.quantidadeVendida}
                       imagemUrl={product.imagemUrl}
                     />
@@ -103,7 +102,7 @@ export default function Home() {
         <div id="products" className="mb-10 flex flex-col gap-5">
           <h2 className="md:pl-12 text-2xl">Bem Avaliados</h2>
           <Carousel
-            value={produtosTeste}
+            value={produtos}
             numVisible={6}
             numScroll={1}
             responsiveOptions={[
@@ -124,8 +123,8 @@ export default function Home() {
                       id={product._id}
                       title={product.nome}
                       category={product.categoria}
-                      precoCompra={product.precoCompra}
-                      precoAluguel={product.precoAluguel}
+                      tipoVenda={product.tipoVenda}
+                      preco={product.preco}
                       quantidadeVendida={product.quantidadeVendida}
                       imagemUrl={product.imagemUrl}
                     />

@@ -6,16 +6,16 @@ export default function CardProducts({
   id,
   title,
   category,
-  precoCompra,
-  precoAluguel,
+  tipoVenda,
+  preco,
   quantidadeVendida,
   imagemUrl
 }: {
   id: number | string
   title: string
   category: string
-  precoCompra: number
-  precoAluguel: number
+  tipoVenda: string
+  preco: number
   quantidadeVendida: number
   imagemUrl: string
 }) {
@@ -35,8 +35,8 @@ export default function CardProducts({
         <h4>{title}</h4>
       </Link>
       <p className="text-gray-500">{category}</p>
-      <p className="font-bold">Comprar: ${precoCompra}</p>
-      <p className="font-bold">Aluguel: ${precoAluguel}</p>
+      <p className="font-bold">Tipo de Venda: {tipoVenda}</p>
+      <p className="font-bold">Preço: ${preco}</p>
       <p className="text-green-600">Vendidos: {quantidadeVendida}</p>
       <Button onClick={handleAddToCart}>Adicionar ao Carrinho</Button>
     </div>

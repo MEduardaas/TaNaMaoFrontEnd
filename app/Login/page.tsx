@@ -4,12 +4,13 @@ import Input from '@/components/subComponents/Input'
 import LinkNavigation from '@/components/subComponents/LinkNavigation'
 import { Failed } from '@/components/subComponents/Popup'
 import { apiRequest } from '@/lib/api'
+
 import { ArrowLeft } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
-export default function page() {
+export default function Page() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [form, setForm] = useState({ email: '', senha: '' })
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -19,10 +20,7 @@ export default function page() {
     e.preventDefault()
     console.log(form)
     const res = await apiRequest('/login', 'POST', form)
-    if (res.token) {
-      localStorage.setItem('token', res.token)
-      localStorage.setItem('email', form.email)
-      setMessage(res.error ? res.error : '')
+    if (res.accessToken) {
       window.location.href = '/Perfil'
     } else {
       setMessage(res.error ? res.error : 'Erro desconhecido')

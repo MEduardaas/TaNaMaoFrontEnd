@@ -3,7 +3,8 @@ import Button from '@/components/subComponents/Button'
 import Input from '@/components/subComponents/Input'
 import LinkNavigation from '@/components/subComponents/LinkNavigation'
 import { Failed } from '@/components/subComponents/Popup'
-import { apiRequest } from '@/lib/api'
+import { useApi } from '@/hooks/useApi'
+import { useRouter } from 'next/navigation'
 
 import { ArrowLeft } from 'lucide-react'
 import Image from 'next/image'
@@ -14,14 +15,25 @@ export default function Page() {
   const [form, setForm] = useState({ email: '', senha: '' })
   const [message, setMessage] = useState('')
 
+  const { apiRequest } = useApi()
+  const router = useRouter()
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     console.log(form)
-    const res = await apiRequest('/login', 'POST', form)
-    if (res.accessToken) {
-      window.location.href = '/Perfil'
-    } else {
+    try {
+      const res = await apiRequest('/login', 'POST', form)
+      // se o backend retornar accessToken ou sucesso, navega para Perfil
+      if (res?.accessToken || res?.success) {
+        router.replace('/Perfil')
+        return
+      }
       setMessage(res.error ? res.error : 'Erro desconhecido')
+    } catch (err) {
+      const maybe = err as unknown as { message?: unknown }
+      const message =
+        typeof maybe?.message === 'string' ? maybe.message : String(err)
+      setMessage(message ?? 'Erro desconhecido')
     }
   }
   return (

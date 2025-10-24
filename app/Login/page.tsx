@@ -10,13 +10,19 @@ import { ArrowLeft } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
+import { useAuth } from '@/hooks/useAuth'
 
 export default function Page() {
   const [form, setForm] = useState({ email: '', senha: '' })
   const [message, setMessage] = useState('')
+  const router = useRouter()
+  const { accessToken } = useAuth()
+
+  if (accessToken) {
+    router.replace('/Perfil')
+  }
 
   const { apiRequest } = useApi()
-  const router = useRouter()
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()

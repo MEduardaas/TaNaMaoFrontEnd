@@ -3,7 +3,6 @@ import Button from '@/components/subComponents/Button'
 import Input from '@/components/subComponents/Input'
 import LinkNavigation from '@/components/subComponents/LinkNavigation'
 import { Failed } from '@/components/subComponents/Popup'
-import { useAuth } from '@/hooks/useAuth'
 import { apiRequest } from '@/lib/api'
 
 import { ArrowLeft } from 'lucide-react'
@@ -12,9 +11,7 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 
 export default function Page() {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [form, setForm] = useState({ email: '', senha: '' })
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [message, setMessage] = useState('')
 
   async function handleSubmit(e: React.FormEvent) {
@@ -39,7 +36,6 @@ export default function Page() {
           width={300}
           height={300}
           className="xl:w-md"
-          quality={100}
         />
       </div>
       <div

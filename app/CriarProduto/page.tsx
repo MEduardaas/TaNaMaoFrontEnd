@@ -29,33 +29,34 @@ export default function page() {
             className="border-2 border-gray-300 rounded-lg p-2"
           >
             <option value="">Selecione uma categoria</option>
+            <option value="moveis">Móveis</option>
+            <option value="eletronicos">Eletrônicos</option>
+            <option value="livros">Livros</option>
+            <option value="jogos">Jogos</option>
+            <option value="brinquedos">Brinquedos</option>
+            <option value="automoveis">Automóveis</option>
+            <option value="esportes_lazer">Esportes</option>
+            <option value="moda">Moda</option>
+            <option value="beleza">Beleza</option>
             <option value="ferramentas">Ferramentas</option>
             <option value="eletrodomesticos">Eletrodomésticos</option>
-            <option value="eletronicos">Eletrônicos</option>
-            <option value="festas_eventos">Festas e Eventos</option>
           </select>
 
-          <label htmlFor="precoCompra">Preço da Compra</label>
-          <input
-            type="text"
-            id="precoCompra"
-            placeholder="Digite o preço da compra"
+          <label htmlFor="tipoVenda">Tipo de Venda</label>
+          <select
+            id="tipoVenda"
             className="border-2 border-gray-300 rounded-lg p-2"
-          />
+          >
+            <option value="">Selecione um tipo de venda</option>
+            <option value="venda">Venda</option>
+            <option value="aluguel">Aluguel</option>
+          </select>
 
-          <label htmlFor="precoAluguel">Preço do Aluguel</label>
+          <label htmlFor="preco">Preço do Produto</label>
           <input
             type="text"
-            id="precoAluguel"
-            placeholder="Digite o preço do aluguel"
-            className="border-2 border-gray-300 rounded-lg p-2"
-          />
-
-          <label htmlFor="quantidade">Quantidade disponível</label>
-          <input
-            type="text"
-            id="quantidade"
-            placeholder="Digite a quantidade disponível"
+            id="preco"
+            placeholder="Digite o preço do produto"
             className="border-2 border-gray-300 rounded-lg p-2"
           />
 

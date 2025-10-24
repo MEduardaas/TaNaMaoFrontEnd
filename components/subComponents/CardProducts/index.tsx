@@ -25,17 +25,20 @@ export default function CardProducts({
     console.log(`Produto ${id} adicionado ao carrinho`)
   }
   return (
-    <Link
-      href={`/produto/${id}`}
-      className="flex flex-col items-start gap-2 border-gray-300 border-2 p-4 rounded-lg max-w-max min-h-max"
-    >
-      <img src={imagemUrl} alt="Categorias" className="rounded-lg shadow-md" />
-      <h4>{title}</h4>
+    <div className="flex flex-col items-start gap-2 border-gray-300 border-2 p-4 rounded-lg max-w-max min-h-max">
+      <Link href={`/produto/${id}`}>
+        <img
+          src={imagemUrl}
+          alt="Categorias"
+          className="rounded-lg shadow-md"
+        />
+        <h4>{title}</h4>
+      </Link>
       <p className="text-gray-500">{category}</p>
       <p className="font-bold">Comprar: ${precoCompra}</p>
       <p className="font-bold">Aluguel: ${precoAluguel}</p>
       <p className="text-green-600">Vendidos: {quantidadeVendida}</p>
       <Button onClick={handleAddToCart}>Adicionar ao Carrinho</Button>
-    </Link>
+    </div>
   )
 }

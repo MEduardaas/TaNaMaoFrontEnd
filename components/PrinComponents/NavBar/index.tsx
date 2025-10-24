@@ -1,9 +1,9 @@
 'use client'
 import LinkNavigation from '@/components/subComponents/LinkNavigation'
+import { useAuth } from '@/hooks/useAuth'
 import {
   CirclePlus,
   Heart,
-  MapPin,
   Menu,
   Search,
   ShoppingCart,
@@ -17,7 +17,8 @@ import { useState } from 'react'
 export default function NavBar() {
   const [menuState, setMenuState] = useState(false)
   const [cartState, setCartState] = useState(false)
-  const [isLogged, setIsLogged] = useState(false)
+  const { accessToken, logout } = useAuth()
+  const isLogged = !!accessToken
 
   return (
     <nav className=" bg-primary w-full h-16 flex items-center justify-between px-2 mb-4 lg:px-18">
@@ -69,6 +70,11 @@ export default function NavBar() {
               <LinkNavigation href="/" className="">
                 Ajuda
               </LinkNavigation>
+              {isLogged && (
+                <button className="" onClick={logout}>
+                  Deslogar
+                </button>
+              )}
             </div>
           </div>
         )}

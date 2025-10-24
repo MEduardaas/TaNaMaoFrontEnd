@@ -2,9 +2,19 @@
 import Footer from '@/components/PrinComponents/Footer'
 import NavBar from '@/components/PrinComponents/NavBar'
 import Button from '@/components/subComponents/Button'
+import { useAuth } from '@/hooks/useAuth'
 import Link from 'next/link'
 
 export default function page() {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { accessToken, loading } = useAuth()
+
+  if (!accessToken) {
+    window.location.href = '/Login'
+  }
+
+  if (loading) return <div>Carregando...</div>
+
   return (
     <div className="flex flex-col h-full gap-16">
       <NavBar />

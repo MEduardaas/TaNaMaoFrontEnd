@@ -3,6 +3,7 @@ import Button from '@/components/subComponents/Button'
 import Input from '@/components/subComponents/Input'
 import LinkNavigation from '@/components/subComponents/LinkNavigation'
 import { Failed } from '@/components/subComponents/Popup'
+import { useAuth } from '@/hooks/useAuth'
 import { apiRequest } from '@/lib/api'
 
 import { ArrowLeft } from 'lucide-react'

@@ -15,10 +15,6 @@ export default function Page() {
   const [user, setUser] = useState<any | null>(null)
   const { apiRequest } = useApi()
 
-  if (!accessToken) {
-    window.location.href = '/Login'
-  }
-
   useEffect(() => {
     if (loading) return
 
@@ -35,6 +31,10 @@ export default function Page() {
   }, [apiRequest, accessToken, loading])
 
   if (loading) return <div>Carregando...</div>
+
+  if (!accessToken) {
+    window.location.href = '/Login'
+  }
 
   return (
     <div className="flex flex-col h-full gap-16">

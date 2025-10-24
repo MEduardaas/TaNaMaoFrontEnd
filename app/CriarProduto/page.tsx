@@ -9,11 +9,11 @@ export default function page() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { accessToken, loading } = useAuth()
 
+  if (loading) return <div>Carregando...</div>
+
   if (!accessToken) {
     window.location.href = '/Login'
   }
-
-  if (loading) return <div>Carregando...</div>
 
   return (
     <div className="flex flex-col h-full gap-16">

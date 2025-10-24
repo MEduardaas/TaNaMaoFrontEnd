@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { useRouter } from 'next/navigation'
 import { useEffect, useState, useCallback } from 'react'
@@ -20,18 +20,15 @@ export function useAuth(): UseAuthResult {
     async function init() {
       if (typeof window === 'undefined') return
       try {
-        // tenta trocar o refresh token (guardado em cookie HttpOnly) por um access token
         const res = await fetch('/api/refresh', {
           method: 'POST',
           credentials: 'include',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json' }
         })
 
         if (!res.ok) {
-          // sem sessão válida -> redireciona para página negada/login
           if (mounted) {
             setAccessToken(null)
-            router.replace('/Negado')
           }
           return
         }
@@ -41,7 +38,7 @@ export function useAuth(): UseAuthResult {
       } catch {
         if (mounted) {
           setAccessToken(null)
-          router.replace('/Negado')
+          router.replace('/Login')
         }
       } finally {
         if (mounted) setLoading(false)
@@ -56,10 +53,8 @@ export function useAuth(): UseAuthResult {
 
   const logout = useCallback(async () => {
     try {
-      // chama endpoint de logout que deve limpar cookie no servidor
       await fetch('/api/logout', { method: 'POST', credentials: 'include' })
     } catch {
-      // ignore
     } finally {
       setAccessToken(null)
       router.replace('/Login')

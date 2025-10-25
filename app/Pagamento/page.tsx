@@ -6,15 +6,15 @@ import Image from "next/image";
 
 
 export default function page() {
-    return(<div className="flex flex-col items-center  h-full gap-16 mt-8 ">
+    return(<div className="flex flex-col items-start h-full gap-16 ">
      <NavBar />
-     <div className="w-max my-20 flex flex-col  gap-8 font-bold">
+     <div className="w-max mt-[50px] pl-[90px] flex flex-col gap-8 font-bold">
             <p className="text-4xl">Finalizar compra</p>
            
           <div className="flex flex-col gap-4">
-            <div className="w-[460px] bg-gray-400/30  p-6 flex flex-col gap-4 items-center shadow-sm">
-            <Image src="/images/retanguloPagamento.png" alt="Pagamento" width={400} height={400} className="mx-auto"/>
-            <Image src="/images/retanguloPagamento.png" alt="Pagamento" width={400} height={400} className="mx-auto"/>
+            <div className="w-[660px] bg-gray-400/30  p-6 flex flex-col gap-4 items-center shadow-sm">
+            <Image src="/images/retanguloPagamento.png" alt="Pagamento" width={900} height={400} className="mx-auto"/>
+            <Image src="/images/retanguloPagamento.png" alt="Pagamento" width={900} height={400} className="mx-auto"/>
             </div>
           </div>
            <p className="text-xl">Total: R$ 100,00</p>

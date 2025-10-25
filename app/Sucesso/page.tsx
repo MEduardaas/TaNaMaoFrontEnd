@@ -3,7 +3,6 @@ import Footer from "@/components/PrinComponents/Footer";
 import NavBar from "@/components/PrinComponents/NavBar";
 import Button from "@/components/subComponents/Button";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function page() {
     return(<div className="flex flex-col items-center  h-full gap-16  ">

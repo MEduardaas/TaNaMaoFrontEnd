@@ -1,8 +1,6 @@
 'use client'
 import Footer from '@/components/PrinComponents/Footer'
 import NavBar from '@/components/PrinComponents/NavBar'
-import Input from '@/components/subComponents/Input'
-import Button from '@/components/subComponents/Button'
 import { useState } from 'react'
 export default function Page() {
     

@@ -3,81 +3,262 @@
 import Footer from '@/components/PrinComponents/Footer'
 import NavBar from '@/components/PrinComponents/NavBar'
 
-import Input from '@/components/subComponents/Input'
 import Button from '@/components/subComponents/Button'
+import Carregando from '@/app/Carregando/page'
+import { use, useEffect, useState } from 'react'
+import { useApi } from '@/hooks/useApi'
+import { useAuth } from '@/hooks/useAuth'
+import Input from '@/components/subComponents/Input'
 
 export default function Page() {
+  const { accessToken, loading } = useAuth()
+  const { apiRequest } = useApi()
+  const [message, setMessage] = useState('')
+  const [user, setUser] = useState({
+    nome: '',
+    email: '',
+    cpf: '',
+    endereco: {
+      telefone: '',
+      cep: '',
+      rua: '',
+      complemento: '',
+      cidade: '',
+      estado: ''
+    }
+  })
+
+  const fetchUser = async () => {
+    try {
+      const res = await apiRequest('/perfil', 'GET')
+      console.log('Dados do usuário:', res.user)
+      // Merge defaults so endereco is always defined and input bindings won't throw
+      setUser({
+        nome: res.user.nome || '',
+        email: res.user.email || '',
+        cpf: res.user.cpf || '',
+        endereco: {
+          telefone: res.user.endereco[0].telefone || '',
+          cep: res.user.endereco[0].cep || '',
+          rua: res.user.endereco[0].rua || '',
+          complemento: res.user.endereco[0].complemento || '',
+          cidade: res.user.endereco[0].cidade || '',
+          estado: res.user.endereco[0].estado || ''
+        }
+      })
+      console.log(user)
+    } catch (error) {
+      console.error('Erro ao buscar dados do usuário:', error)
+    }
+  }
+
+  useEffect(() => {
+    fetchUser()
+  }, [apiRequest, accessToken, loading])
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    try {
+      await apiRequest('/perfil', 'PUT', user)
+      setMessage('Informações atualizadas com sucesso.')
+    } catch (error) {
+      setMessage('Erro ao atualizar informações.')
+    }
+  }
+
+  if (loading) return <Carregando />
+
+  if (!accessToken) {
+    window.location.href = '/Login'
+  }
+
   return (
-  <div className="flex flex-col h-full gap-18">
+    <div className="flex flex-col h-full gap-18">
       <NavBar />
       <main className="mx-auto w-full max-w-7xl px-4 ">
-        <div className="flex flex-col  gap-6 justify-center items-center">
-          <div className="md:w-4/5 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <section className="bg-white shadow-md rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4">Minhas Informações</h2>
-              <form className="flex flex-col gap-4">
-               <label className="flex flex-col">
-                  <label htmlFor="nome">Nome completo</label>
-                  <input type="text" id="name" placeholder="Nome Completo"  className="border-2 border-gray-300 rounded-lg p-2"/>
-                </label>
+        <div className="flex flex-col sm:mx-10 gap-6 justify-center items-center">
+          <form
+            onSubmit={handleSubmit}
+            className="w-full md:w-4/5 flex flex-col gap-6 items-center"
+          >
+            <div className="flex gap-6 flex-col md:flex-row w-full">
+              <section className="bg-white shadow-md rounded-lg p-6 w-full md:w-1/2">
+                <h2 className="text-xl font-semibold mb-4">
+                  Minhas Informações
+                </h2>
+                <div className="flex flex-col gap-4">
+                  <label className="flex flex-col">
+                    <label htmlFor="nome">Nome completo</label>
+                    <Input
+                      type="text"
+                      value={user.nome || ''}
+                      onChange={e => setUser({ ...user, nome: e.target.value })}
+                      placeholder="Nome Completo"
+                    />
+                  </label>
+
+                  <label className="flex flex-col">
+                    <label htmlFor="email">Email</label>
+                    <Input
+                      type="email"
+                      value={user.email || ''}
+                      onChange={e =>
+                        setUser({ ...user, email: e.target.value })
+                      }
+                      placeholder="seu@email.com"
+                    />
+                  </label>
+                  <label className="flex flex-col">
+                    <label htmlFor="cpf">CPF</label>
+                    <Input
+                      type="text"
+                      value={user.cpf || ''}
+                      onChange={e => setUser({ ...user, cpf: e.target.value })}
+                      placeholder="000.000.000-00"
+                      disabled={true}
+                    />
+                  </label>
+                  <label className="flex flex-col">
+                    <label htmlFor="telefone">Telefone</label>
+                    <Input
+                      type="text"
+                      value={user.endereco.telefone || ''}
+                      onChange={e =>
+                        setUser({
+                          ...user,
+                          endereco: {
+                            ...user.endereco,
+                            telefone: e.target.value
+                          }
+                        })
+                      }
+                      placeholder="(00) 00000-0000"
+                    />
+                  </label>
+                </div>
+              </section>
+
+              <section className="bg-white shadow-md rounded-lg p-6 w-full md:w-1/2">
+                <h2 className="text-xl font-semibold mb-4">Endereço</h2>
 
                 <label className="flex flex-col">
-                  <label htmlFor="email">Email</label>
-                  <input type="email" id="email" placeholder="seu@email.com" className="border-2 border-gray-300 rounded-lg p-2" />
-                </label>
-
-               
-                <label className="flex flex-col">
-                  <label htmlFor="cpf">CPF</label>
-                  <input type="text" id="cpf" placeholder="000.000.000-00" className="border-2 border-gray-300 rounded-lg p-2" />
-                </label>
-
-               <label className="flex flex-col">
-                  <label htmlFor="telefone">Telefone</label>
-                  <input type="text" id="telefone" placeholder="(00) 00000-0000" className="border-2 border-gray-300 rounded-lg p-2"/>
-                </label>
-
-              </form>
-            </section>
-
-            <section className="bg-white shadow-md rounded-lg p-6">
-              <h2 className="text-xl font-semibold mb-4">Endereço</h2>
-              <form >
-                 <label className="flex flex-col">
                   <label htmlFor="cep">CEP</label>
-                  <input type="text" id="cep" placeholder="000000-000" className="border-2 border-gray-300 rounded-lg p-2" />
+                  <Input
+                    type="text"
+                    value={user.endereco.cep || ''}
+                    onChange={e =>
+                      setUser({
+                        ...user,
+                        endereco: { ...user.endereco, cep: e.target.value }
+                      })
+                    }
+                    placeholder="000000-000"
+                  />
                 </label>
 
                 <label className="flex flex-col">
                   <label htmlFor="rua">Rua</label>
-                  <input type="text" id="rua" placeholder="Nome da rua" className="border-2 border-gray-300 rounded-lg p-2" />
+                  <Input
+                    type="text"
+                    value={user.endereco.rua || ''}
+                    onChange={e =>
+                      setUser({
+                        ...user,
+                        endereco: { ...user.endereco, rua: e.target.value }
+                      })
+                    }
+                    placeholder="Nome da rua"
+                  />
                 </label>
 
                 <label className="flex flex-col">
                   <label htmlFor="complemento">Complemento (opcional)</label>
-                  <textarea name="complemento" id="complemento" className="border-2 border-gray-300 rounded-lg p-2" placeholder="Apto 123"></textarea>
+                  <textarea
+                    name="complemento"
+                    id="complemento"
+                    value={user.endereco.complemento || ''}
+                    onChange={e =>
+                      setUser({
+                        ...user,
+                        endereco: {
+                          ...user.endereco,
+                          complemento: e.target.value
+                        }
+                      })
+                    }
+                    className="border border-gray-300 text-black placeholder-gray-300 bg-transparent p-2 rounded-xl w-full"
+                    placeholder="Apto 123"
+                  ></textarea>
                 </label>
 
-                 <label className="flex flex-col">
+                <label className="flex flex-col">
                   <label htmlFor="cidade">Cidade</label>
-                  <input type="text" id="cidade" placeholder="Nome da cidade" className="border-2 border-gray-300 rounded-lg p-2" />
+                  <Input
+                    type="text"
+                    value={user.endereco.cidade || ''}
+                    onChange={e =>
+                      setUser({
+                        ...user,
+                        endereco: { ...user.endereco, cidade: e.target.value }
+                      })
+                    }
+                    placeholder="Nome da cidade"
+                  />
                 </label>
 
-
-                  <label className="flex flex-col">
+                <label className="flex flex-col">
                   <label htmlFor="estado">Estado</label>
-                  <input type="text" id="estado" placeholder="Nome do estado" className="border-2 border-gray-300 rounded-lg p-2"/>
+                  <select
+                    id="estado"
+                    value={user.endereco.estado || ''}
+                    onChange={e =>
+                      setUser({
+                        ...user,
+                        endereco: { ...user.endereco, estado: e.target.value }
+                      })
+                    }
+                    className="border border-gray-300 text-black placeholder-gray-300 bg-transparent p-2 rounded-xl w-full"
+                  >
+                    <option value="">Selecione o estado</option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                  </select>
                 </label>
-
-              </form>
-            </section>
-          </div>
-          <div className="pt-4 w-1/5 items-center justify-center">
-               <Button>Salvar</Button>
+              </section>
             </div>
+            {message}
+            <div className="pt-4 w-full sm:w-1/5 items-center justify-center">
+              <Button>Salvar</Button>
+            </div>
+          </form>
         </div>
       </main>
       <Footer />
-    </div>)
+    </div>
+  )
 }
-

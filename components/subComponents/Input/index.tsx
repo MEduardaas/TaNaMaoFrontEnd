@@ -2,12 +2,14 @@ export default function Input({
   type = 'text',
   placeholder,
   onChange,
-  value
+  value,
+  disabled
 }: {
   type?: string
   placeholder: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   value?: string
+  disabled?: boolean
 }) {
   return (
     <input
@@ -17,6 +19,7 @@ export default function Input({
       value={value}
       className="border border-gray-300 text-black placeholder-gray-300 bg-transparent p-2 rounded-xl w-full"
       required
+      disabled={disabled}
     />
   )
 }

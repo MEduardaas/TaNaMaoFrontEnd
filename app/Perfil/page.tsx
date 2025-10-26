@@ -5,6 +5,7 @@ import NavBar from '@/components/PrinComponents/NavBar'
 import CardPerfil from '@/components/subComponents/CardPerfil'
 import { useAuth } from '@/hooks/useAuth'
 import { useApi } from '@/hooks/useApi'
+import Carregando from '@/app/Carregando/page'
 
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
@@ -30,7 +31,7 @@ export default function Page() {
     fetchUser()
   }, [apiRequest, accessToken, loading])
 
-  if (loading) return <div>Carregando...</div>
+  if (loading) return <Carregando />
 
   if (!accessToken) {
     window.location.href = '/Login'

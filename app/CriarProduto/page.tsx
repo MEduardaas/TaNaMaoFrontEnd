@@ -9,9 +9,8 @@ import { useState } from 'react'
 import { Failed } from '@/components/subComponents/Popup'
 
 export default function page() {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { accessToken, loading } = useAuth()
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+  
   const { apiRequest } = useApi()
   const [message, setMessage] = useState('')
 

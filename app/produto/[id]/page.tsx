@@ -1,25 +1,66 @@
 'use client'
 import NavBar from '@/components/PrinComponents/NavBar'
 import Footer from '@/components/PrinComponents/Footer'
-import { notFound } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import Button from '@/components/subComponents/Button'
 import { useEffect, useState } from 'react'
-import { apiRequest } from '@/lib/api'
+import { useCart } from '@/Provider/useCart'
+import Avaliacao from '@/components/subComponents/Avaliacao'
+import { useApi } from '@/hooks/useApi'
+import { IProduto } from '@/types/product'
 
-type Props = {
-  params: { id: string }
-}
-
-export default function ProdutoDetalhe({ params }: Props) {
-  const [produto, setProduto] = useState<any>({})
+export default function ProdutoDetalhe() {
+  const [produto, setProduto] = useState<IProduto | null>(null)
+  const { openCart, addItem } = useCart()
+  const { apiRequest } = useApi()
+  const params = useParams()
+  const produtoId = params.id
 
   useEffect(() => {
     const fetchProduto = async () => {
-      const response = await apiRequest(`/produtos/${params.id}`, 'GET')
+      if (!produtoId) return
+      const response = await apiRequest(`/produtos/${produtoId}`, 'GET')
       setProduto(response.produto)
     }
     fetchProduto()
-  }, [])
+  }, [apiRequest, produtoId])
+
+  if (!produto) return <div>Carregando...</div>
+  const isVenda =
+    typeof produto.tipoVenda === 'string'
+      ? produto.tipoVenda === 'venda'
+      : produto.tipoVenda === 1
+
+  const handleAddToCart = async () => {
+    try {
+      console.log('Adicionar ao carrinho:', produtoId)
+      try {
+        const res = await apiRequest('/carrinho', 'POST', {
+          idProduto: String(produtoId),
+          quantidade: 1
+        })
+        if (res.status === 200) {
+          addItem(
+            {
+              idProduto: String(produtoId),
+              nome: produto?.nome ?? '',
+              preco: produto?.preco
+            },
+            1
+          )
+        }
+        console.log('Resposta ao adicionar ao carrinho:', res)
+      } catch (err) {
+        console.error(
+          'Erro na API ao adicionar ao carrinho (não bloqueia UI):',
+          err
+        )
+      }
+      openCart()
+    } catch (error) {
+      console.error('Erro ao adicionar ao carrinho:', error)
+    }
+  }
 
   return (
     <div className="min-h-screen flex flex-col gap-8">
@@ -41,17 +82,17 @@ export default function ProdutoDetalhe({ params }: Props) {
               <p className="bg-green-200 text-green-900 rounded-md max-w-max p-2 text-sm text-gray-600 mb-2">
                 {produto.categoria}
               </p>
-              <p>Quantidade Disponiveis: {produto.quantidade}</p>
-              <h2 className="text-xl font-bold">Preço de Compra</h2>
-              <p className="text-xl font-bold mb-2">R$ {produto.precoCompra}</p>
-              <Button>Adicionar ao Carrinho</Button>
+              <p>Quantidade vendida: {produto.quantidadeVendida}</p>
+              {isVenda ? (
+                <>
+                  <h2 className="text-xl font-bold">Preço de Compra</h2>
+                </>
+              ) : (
+                <h2 className="text-xl font-bold mt-4">Preço de Aluguel</h2>
+              )}
 
-              <h2 className="text-xl font-bold mt-4">Preço de Aluguel</h2>
-              <p className="text-xl font-bold mb-2">
-                R$ {produto.precoAluguel}
-              </p>
-
-              <Button>Alugar</Button>
+              <p className="text-xl font-bold mb-2">R$ {produto.preco}</p>
+              <Button onClick={handleAddToCart}>Adicionar ao Carrinho</Button>
             </div>
             <div className="w-full border-2 border-gray-300 rounded-lg p-5 mt-6">
               <h1 className="text-lg font-bold">Descrição</h1>
@@ -60,6 +101,10 @@ export default function ProdutoDetalhe({ params }: Props) {
               </ul>
             </div>
           </div>
+        </div>
+        <div>
+          <h2 className="text-xl font-bold mt-4">Avaliacoes</h2>
+          <Avaliacao nome="kleberson" nota={5} comentario="Ótimo produto!" />
         </div>
       </main>
       <Footer />

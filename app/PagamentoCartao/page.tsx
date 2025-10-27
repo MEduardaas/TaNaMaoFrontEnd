@@ -13,7 +13,6 @@ export default function page() {
       <div className="w-full max-w-[900px] mx-auto px-6 mt-10 flex flex-col gap-8 font-bold">
         <p className="text-4xl">Finalizar compra</p>
 
-        {/* Retângulos de pagamento */}
         <div className="w-full bg-gray-400/30 p-6 flex flex-col gap-6 items-center shadow-sm rounded-lg">
           <Image
             src="/images/retanguloPagamento.png"
@@ -41,8 +40,8 @@ export default function page() {
                 </div>
                 <button
                   style={{
-                    backgroundColor: "#16A34A",
-                    color: "white",
+                    backgroundColor: "#0efa64ff",
+                    color: "black",
                     border: "2px solid black",
                     fontWeight: "bold",
                     width: "120px",

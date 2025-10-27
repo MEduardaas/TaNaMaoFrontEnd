@@ -39,18 +39,18 @@ export default function ProdutoDetalhe() {
           idProduto: String(produtoId),
           quantidade: 1
         })
-        if (res.status === 200) {
-          addItem(
-            {
-              idProduto: String(produtoId),
-              nome: produto?.nome ?? '',
-              preco: produto?.preco,
-              imagemUrl: produto?.imagemUrl
-            },
-            1
-          )
-        }
-        console.log('Resposta ao adicionar ao carrinho:', res)
+
+        addItem(
+          {
+            idProduto: String(produtoId),
+            nome: produto?.nome ?? '',
+            preco: produto?.preco,
+            imagemUrl: produto?.imagemUrl
+          },
+          1
+        )
+
+        openCart()
       } catch (err) {
         console.error(
           'Erro na API ao adicionar ao carrinho (não bloqueia UI):',

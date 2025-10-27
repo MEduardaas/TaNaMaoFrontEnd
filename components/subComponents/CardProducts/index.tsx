@@ -21,7 +21,7 @@ export default function CardProducts({
   quantidadeVendida?: number
   imagemUrl: string
 }) {
-  const { addItem } = useCart()
+  const { addItem, openCart } = useCart()
   const { apiRequest } = useApi()
 
   const handleAddToCart = async () => {
@@ -41,7 +41,8 @@ export default function CardProducts({
           },
           1
         )
-        console.log('Resposta ao adicionar ao carrinho:', res)
+
+        openCart()
       } catch (err) {
         console.error(
           'Erro na API ao adicionar ao carrinho (não bloqueia UI):',

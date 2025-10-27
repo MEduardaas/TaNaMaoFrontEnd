@@ -48,7 +48,6 @@ export default function NavBar() {
               `/produtos/${item.idProduto}`,
               'GET'
             )
-            console.log('Produto do carrinho:', item)
             addItem(
               {
                 idProduto: String(resProduto.produto._id),
@@ -213,7 +212,7 @@ export default function NavBar() {
                 <span className="font-bold text-lg">{price}</span>
               </div>
               <Link
-                href="/carrinho"
+                href="/Pagamento"
                 className="bg-black border-2 font-bold border-black w-full text-white text-center p-2 rounded-xl cursor-pointer hover:bg-white hover:text-black transition-colors"
               >
                 Finalizar Compra

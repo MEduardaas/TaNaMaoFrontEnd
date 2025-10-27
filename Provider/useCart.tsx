@@ -48,7 +48,6 @@ export function CartProvider({
       }
       return [...prev, { ...item, quantidade }]
     })
-    setIsOpen(true)
   }
 
   const removeItem = (idProduto: number | string) => {

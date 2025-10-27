@@ -20,7 +20,7 @@ export default function page() {
            <p className="text-xl">Total: R$ 100,00</p>
         <form className="flex flex-col gap-4 ">
                 <p className="text-xl">Forma de pagamento:</p>
-            <div className="flex gap-4 w-full ">
+            <div className="flex gap-4 w-full p-4">
                 <Button>Pix</Button>
                 <Button>Cartão</Button>
             </div>

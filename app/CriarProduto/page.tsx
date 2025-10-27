@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+
 'use client'
 import Footer from '@/components/PrinComponents/Footer'
 import NavBar from '@/components/PrinComponents/NavBar'

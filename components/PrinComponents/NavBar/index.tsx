@@ -24,6 +24,16 @@ export default function NavBar() {
   const { accessToken, logout } = useAuth()
   const isLogged = !!accessToken
   const { apiRequest } = useApi()
+  const [price, setPrice] = useState(0)
+
+  useEffect(() => {
+    const total = items.reduce((sum, it) => {
+      const preco = Number(it.preco ?? 0)
+      const quantidade = Number(it.quantidade ?? 0)
+      return sum + preco * quantidade
+    }, 0)
+    setPrice(total)
+  }, [items])
 
   useEffect(() => {
     const getCart = async () => {
@@ -32,6 +42,7 @@ export default function NavBar() {
         clearCart()
 
         if (res.carrinho && Array.isArray(res.carrinho)) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           res.carrinho.forEach(async (item: any) => {
             const resProduto = await apiRequest(
               `/produtos/${item.idProduto}`,
@@ -197,6 +208,10 @@ export default function NavBar() {
                 )}
               </ul>
               <hr className="border-gray-300" />
+              <div className="w-full flex justify-start items-center">
+                <span className="font-bold text-lg">Total: R$ </span>
+                <span className="font-bold text-lg">{price}</span>
+              </div>
               <Link
                 href="/carrinho"
                 className="bg-black border-2 font-bold border-black w-full text-white text-center p-2 rounded-xl cursor-pointer hover:bg-white hover:text-black transition-colors"

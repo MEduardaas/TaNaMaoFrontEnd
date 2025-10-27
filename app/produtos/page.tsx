@@ -16,9 +16,9 @@ type Produto = {
 }
 
 export default function ProdutosPage() {
-  const search = useSearchParams()
-  const router = useRouter()
-  const categoria = search?.get('categoria') || ''
+  // const search = useSearchParams()
+  // const router = useRouter()
+  // const categoria = search?.get('categoria') || ''
 
   // const produtosFiltrados = async () => {
   //   try{
@@ -29,44 +29,51 @@ export default function ProdutosPage() {
   // }
 
   return (
-    <Suspense fallback={<div>Carregando produtos...</div>}>
-      <div className="min-h-screen flex flex-col gap-8">
-        <NavBar />
-        <main className="container mx-auto px-4 py-8">
-          <div className="flex items-center justify-between mb-6">
-            <h1 className="text-2xl font-semibold">
-              Produtos {categoria}{' '}
-              {/* {categoria && (
-                <span className="text-sm text-gray-500">
-                  ({produtosFiltrados.length})
-                </span>
-              )} */}
-            </h1>
-            {categoria && (
-              <button
-                onClick={() => router.push('/')}
-                className="text-sm text-blue-600 underline"
-              >
-                Limpar filtro
-              </button>
-            )}
-          </div>
+    <div>
+      <NavBar />
+      <main className="container mx-auto px-4 py-8">
+        <h1 className="text-2xl font-semibold mb-6">Produtos</h1>
+      </main>
+      <Footer />
+    </div>
+    // <Suspense fallback={<div>Carregando produtos...</div>}>
+    //   <div className="min-h-screen flex flex-col gap-8">
+    //     <NavBar />
+    //     <main className="container mx-auto px-4 py-8">
+    //       <div className="flex items-center justify-between mb-6">
+    //         <h1 className="text-2xl font-semibold">
+    //           Produtos {categoria}{' '}
+    //           {/* {categoria && (
+    //             <span className="text-sm text-gray-500">
+    //               ({produtosFiltrados.length})
+    //             </span>
+    //           )} */}
+    //         </h1>
+    //         {categoria && (
+    //           <button
+    //             onClick={() => router.push('/')}
+    //             className="text-sm text-blue-600 underline"
+    //           >
+    //             Limpar filtro
+    //           </button>
+    //         )}
+    //       </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {/* {produtosFiltrados.map((p: Produto) => (
-              <Link key={p.id} href={`/produto/${p.id}`} className="block">
-                <CardProducts
-                  id={p.id}
-                  title={p.titulo}
-                  category={p.categoria}
-                  price={p.preco}
-                />
-              </Link>
-            ))} */}
-          </div>
-        </main>
-        <Footer />
-      </div>
-    </Suspense>
+    //       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    //         {/* {produtosFiltrados.map((p: Produto) => (
+    //           <Link key={p.id} href={`/produto/${p.id}`} className="block">
+    //             <CardProducts
+    //               id={p.id}
+    //               title={p.titulo}
+    //               category={p.categoria}
+    //               price={p.preco}
+    //             />
+    //           </Link>
+    //         ))} */}
+    //       </div>
+    //     </main>
+    //     <Footer />
+    //   </div>
+    // </Suspense>
   )
 }

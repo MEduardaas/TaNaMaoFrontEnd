@@ -6,14 +6,14 @@ import CardPerfil from '@/components/subComponents/CardPerfil'
 import { useAuth } from '@/hooks/useAuth'
 import { useApi } from '@/hooks/useApi'
 import Carregando from '@/app/Carregando/page'
+import { IUserPublic } from '@/types/user'
 
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
 export default function Page() {
   const { accessToken, loading } = useAuth()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [user, setUser] = useState<any | null>(null)
+  const [user, setUser] = useState<IUserPublic | null>(null)
   const { apiRequest } = useApi()
 
   useEffect(() => {

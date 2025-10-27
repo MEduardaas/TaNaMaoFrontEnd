@@ -8,12 +8,14 @@ import CardProducts from '@/components/subComponents/CardProducts'
 import { Carousel } from 'primereact/carousel'
 import { useEffect, useState } from 'react'
 import { apiRequest } from '@/lib/api'
+import { IProduto } from '@/types/product'
 
 export default function Home() {
-  const [produtos, setProdutos] = useState<any[]>([])
+  const [produtos, setProdutos] = useState<Array<IProduto & { _id?: string }>>(
+    []
+  )
 
   useEffect(() => {
-    // Simulando uma chamada à API para buscar produtos
     const fetchProdutos = async () => {
       const response = await apiRequest('/', 'GET')
       setProdutos(response.produtos)
@@ -21,8 +23,6 @@ export default function Home() {
 
     fetchProdutos()
   }, [])
-
-  console.log(produtos)
 
   return (
     <div className="flex flex-col h-full gap-5">
@@ -56,7 +56,7 @@ export default function Home() {
             ]}
             className="custom-carousel"
             circular
-            itemTemplate={(category: any) => (
+            itemTemplate={(category: { title: string }) => (
               <CardCategories title={category.title} />
             )}
           />
@@ -80,11 +80,11 @@ export default function Home() {
             circular
             itemTemplate={() => (
               <div className="px-2 flex justify-center">
-                <div className="w-full max-w-[260px]">
-                  {produtos.map(product => (
+                <div className="w-full flex gap-4">
+                  {produtos.map((product: IProduto & { _id?: string }) => (
                     <CardProducts
-                      key={product._id}
-                      id={product._id}
+                      key={product._id ?? product.idProduto}
+                      id={product._id ?? product.idProduto}
                       title={product.nome}
                       category={product.categoria}
                       tipoVenda={product.tipoVenda}
@@ -116,7 +116,7 @@ export default function Home() {
             circular
             itemTemplate={() => (
               <div className="px-2 flex justify-center">
-                <div className="w-full max-w-[260px]">
+                <div className="w-full flex gap-4">
                   {produtos.map(product => (
                     <CardProducts
                       key={product._id}
@@ -135,7 +135,6 @@ export default function Home() {
           />
         </div>
       </main>
-
       <Footer />
     </div>
   )

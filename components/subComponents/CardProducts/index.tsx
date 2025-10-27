@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import React from 'react'
 import Button from '../Button'
+import { useCart } from '@/Provider/useCart'
+import { useApi } from '@/hooks/useApi'
 
 export default function CardProducts({
   id,
@@ -11,22 +13,50 @@ export default function CardProducts({
   quantidadeVendida,
   imagemUrl
 }: {
-  id: number | string
+  id?: number | string
   title: string
   category: string
-  tipoVenda: string
+  tipoVenda: number
   preco: number
-  quantidadeVendida: number
+  quantidadeVendida?: number
   imagemUrl: string
 }) {
-  const handleAddToCart = () => {
-    // Lógica para adicionar o produto ao carrinho
+  const { addItem, openCart } = useCart()
+  const { apiRequest } = useApi()
 
-    console.log(`Produto ${id} adicionado ao carrinho`)
+  const handleAddToCart = async () => {
+    try {
+      try {
+        const res = await apiRequest('/carrinho', 'POST', {
+          idProduto: String(id),
+          quantidade: 1
+        })
+
+        addItem(
+          {
+            idProduto: String(id),
+            nome: title,
+            preco,
+            imagemUrl
+          },
+          1
+        )
+
+        openCart()
+      } catch (err) {
+        console.error(
+          'Erro na API ao adicionar ao carrinho (não bloqueia UI):',
+          err
+        )
+      }
+    } catch (error) {
+      console.error('Erro ao adicionar ao carrinho:', error)
+    }
   }
+
   return (
     <div className="flex flex-col items-start gap-2 border-gray-300 border-2 p-4 rounded-lg max-w-max min-h-max">
-      <Link href={`/produto/${id}`}>
+      <Link href={`/produto/${id}`} className="flex flex-col gap-2">
         <img
           src={imagemUrl}
           alt="Categorias"

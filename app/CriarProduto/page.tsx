@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 'use client'
 import Footer from '@/components/PrinComponents/Footer'
 import NavBar from '@/components/PrinComponents/NavBar'
@@ -10,10 +11,9 @@ import { Failed } from '@/components/subComponents/Popup'
 
 export default function page() {
   const { accessToken, loading } = useAuth()
-  
+
   const { apiRequest } = useApi()
   const [message, setMessage] = useState('')
-
   const [form, setForm] = useState({
     nome: '',
     categoria: '',

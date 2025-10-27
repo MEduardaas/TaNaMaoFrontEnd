@@ -5,46 +5,44 @@ import NavBar from '@/components/PrinComponents/NavBar'
 
 import Button from '@/components/subComponents/Button'
 import Carregando from '@/app/Carregando/page'
-import { use, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useApi } from '@/hooks/useApi'
 import { useAuth } from '@/hooks/useAuth'
+import { Endereco, IUserPublic } from '@/types/user'
 import Input from '@/components/subComponents/Input'
 
 export default function Page() {
   const { accessToken, loading } = useAuth()
   const { apiRequest } = useApi()
   const [message, setMessage] = useState('')
-  const [user, setUser] = useState({
+  const defaultEndereco: Endereco = {
+    telefone: '',
+    cep: '',
+    rua: '',
+    complemento: '',
+    cidade: '',
+    estado: ''
+  }
+
+  const [user, setUser] = useState<IUserPublic & { endereco: Endereco[] }>({
     nome: '',
     email: '',
     cpf: '',
-    endereco: {
-      telefone: '',
-      cep: '',
-      rua: '',
-      complemento: '',
-      cidade: '',
-      estado: ''
-    }
+    endereco: [defaultEndereco]
   })
 
   const fetchUser = async () => {
     try {
       const res = await apiRequest('/perfil', 'GET')
       console.log('Dados do usuário:', res.user)
-      // Merge defaults so endereco is always defined and input bindings won't throw
       setUser({
         nome: res.user.nome || '',
         email: res.user.email || '',
         cpf: res.user.cpf || '',
-        endereco: {
-          telefone: res.user.endereco[0].telefone || '',
-          cep: res.user.endereco[0].cep || '',
-          rua: res.user.endereco[0].rua || '',
-          complemento: res.user.endereco[0].complemento || '',
-          cidade: res.user.endereco[0].cidade || '',
-          estado: res.user.endereco[0].estado || ''
-        }
+        endereco:
+          Array.isArray(res.user.endereco) && res.user.endereco.length > 0
+            ? [res.user.endereco[0]]
+            : [defaultEndereco]
       })
       console.log(user)
     } catch (error) {
@@ -122,14 +120,16 @@ export default function Page() {
                     <label htmlFor="telefone">Telefone</label>
                     <Input
                       type="text"
-                      value={user.endereco.telefone || ''}
+                      value={user.endereco?.[0]?.telefone || ''}
                       onChange={e =>
                         setUser({
                           ...user,
-                          endereco: {
-                            ...user.endereco,
-                            telefone: e.target.value
-                          }
+                          endereco: [
+                            {
+                              ...user.endereco?.[0],
+                              telefone: e.target.value
+                            }
+                          ]
                         })
                       }
                       placeholder="(00) 00000-0000"
@@ -145,11 +145,13 @@ export default function Page() {
                   <label htmlFor="cep">CEP</label>
                   <Input
                     type="text"
-                    value={user.endereco.cep || ''}
+                    value={user.endereco?.[0]?.cep || ''}
                     onChange={e =>
                       setUser({
                         ...user,
-                        endereco: { ...user.endereco, cep: e.target.value }
+                        endereco: [
+                          { ...user.endereco?.[0], cep: e.target.value }
+                        ]
                       })
                     }
                     placeholder="000000-000"
@@ -160,11 +162,13 @@ export default function Page() {
                   <label htmlFor="rua">Rua</label>
                   <Input
                     type="text"
-                    value={user.endereco.rua || ''}
+                    value={user.endereco?.[0]?.rua || ''}
                     onChange={e =>
                       setUser({
                         ...user,
-                        endereco: { ...user.endereco, rua: e.target.value }
+                        endereco: [
+                          { ...user.endereco?.[0], rua: e.target.value }
+                        ]
                       })
                     }
                     placeholder="Nome da rua"
@@ -176,14 +180,13 @@ export default function Page() {
                   <textarea
                     name="complemento"
                     id="complemento"
-                    value={user.endereco.complemento || ''}
+                    value={user.endereco?.[0]?.complemento || ''}
                     onChange={e =>
                       setUser({
                         ...user,
-                        endereco: {
-                          ...user.endereco,
-                          complemento: e.target.value
-                        }
+                        endereco: [
+                          { ...user.endereco?.[0], complemento: e.target.value }
+                        ]
                       })
                     }
                     className="border border-gray-300 text-black placeholder-gray-300 bg-transparent p-2 rounded-xl w-full"
@@ -195,11 +198,13 @@ export default function Page() {
                   <label htmlFor="cidade">Cidade</label>
                   <Input
                     type="text"
-                    value={user.endereco.cidade || ''}
+                    value={user.endereco?.[0]?.cidade || ''}
                     onChange={e =>
                       setUser({
                         ...user,
-                        endereco: { ...user.endereco, cidade: e.target.value }
+                        endereco: [
+                          { ...user.endereco?.[0], cidade: e.target.value }
+                        ]
                       })
                     }
                     placeholder="Nome da cidade"
@@ -210,11 +215,13 @@ export default function Page() {
                   <label htmlFor="estado">Estado</label>
                   <select
                     id="estado"
-                    value={user.endereco.estado || ''}
+                    value={user.endereco?.[0]?.estado || ''}
                     onChange={e =>
                       setUser({
                         ...user,
-                        endereco: { ...user.endereco, estado: e.target.value }
+                        endereco: [
+                          { ...user.endereco?.[0], estado: e.target.value }
+                        ]
                       })
                     }
                     className="border border-gray-300 text-black placeholder-gray-300 bg-transparent p-2 rounded-xl w-full"

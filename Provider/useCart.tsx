@@ -3,9 +3,10 @@
 import React, { createContext, useContext, useState } from 'react'
 
 type CartItem = {
-  idProduto: number | string
+  idProduto: string
   nome?: string
   preco?: number
+  imagemUrl?: string
   quantidade: number
 }
 
@@ -51,7 +52,15 @@ export function CartProvider({
   }
 
   const removeItem = (idProduto: number | string) => {
-    setItems(prev => prev.filter(i => i.idProduto !== idProduto))
+    setItems(prev =>
+      prev
+        .map(i =>
+          i.idProduto === idProduto
+            ? { ...i, quantidade: Math.max(0, i.quantidade - 1) }
+            : i
+        )
+        .filter(i => i.quantidade > 0)
+    )
   }
 
   const clearCart = () => setItems([])

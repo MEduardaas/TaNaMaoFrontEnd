@@ -44,7 +44,8 @@ export default function ProdutoDetalhe() {
             {
               idProduto: String(produtoId),
               nome: produto?.nome ?? '',
-              preco: produto?.preco
+              preco: produto?.preco,
+              imagemUrl: produto?.imagemUrl
             },
             1
           )

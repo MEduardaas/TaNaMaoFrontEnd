@@ -26,22 +26,21 @@ export default function CardProducts({
 
   const handleAddToCart = async () => {
     try {
-      console.log('Adicionar ao carrinho:', id)
       try {
         const res = await apiRequest('/carrinho', 'POST', {
           idProduto: String(id),
           quantidade: 1
         })
-        if (res.status === 200) {
-          addItem(
-            {
-              idProduto: String(id),
-              nome: title,
-              preco
-            },
-            1
-          )
-        }
+
+        addItem(
+          {
+            idProduto: String(id),
+            nome: title,
+            preco,
+            imagemUrl
+          },
+          1
+        )
         console.log('Resposta ao adicionar ao carrinho:', res)
       } catch (err) {
         console.error(

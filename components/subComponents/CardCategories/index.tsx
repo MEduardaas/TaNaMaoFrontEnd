@@ -4,10 +4,13 @@ import {
   BookOpen,
   BriefcaseBusiness,
   CarFront,
+  Dumbbell,
   Gamepad2,
   Hammer,
   RefreshCwOff,
-  Smartphone
+  Shirt,
+  Smartphone,
+  WandSparkles
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -37,6 +40,15 @@ export default function CardCategories({ title }: { title: string }) {
       break
     case 'Automóveis':
       icon = <CarFront className="w-10 h-10" />
+      break
+    case 'Esportes':
+      icon = <Dumbbell className="w-10 h-10" />
+      break
+    case 'Moda':
+      icon = <Shirt className="w-10 h-10" />
+      break
+    case 'Beleza':
+      icon = <WandSparkles className="w-10 h-10" />
       break
     default:
       icon = <RefreshCwOff className="w-10 h-10" />

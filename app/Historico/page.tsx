@@ -19,7 +19,6 @@ export default function Page() {
       { id: 5, nome: "Mesa de jantar", preco: "R$ 200,00 / mês", imagem: "" },
     ],
   };
-
   return (
        <div className="flex flex-col h-full gap-16">
           <NavBar />

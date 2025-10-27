@@ -206,17 +206,23 @@ export default function NavBar() {
                   })
                 )}
               </ul>
-              <hr className="border-gray-300" />
-              <div className="w-full flex justify-start items-center">
-                <span className="font-bold text-lg">Total: R$ </span>
-                <span className="font-bold text-lg">{price}</span>
-              </div>
-              <Link
-                href="/Pagamento"
-                className="bg-black border-2 font-bold border-black w-full text-white text-center p-2 rounded-xl cursor-pointer hover:bg-white hover:text-black transition-colors"
-              >
-                Finalizar Compra
-              </Link>
+              {items.length > 0 && (
+                <>
+                  <hr className="border-gray-300" />
+                  <div className="w-full flex justify-start items-center">
+                    <span className="font-bold text-lg">Total: R$ </span>
+                    <span className="font-bold text-lg">
+                      {price.toFixed(2)}
+                    </span>
+                  </div>
+                  <Link
+                    href="/Pagamento"
+                    className="bg-black border-2 font-bold border-black w-full text-white text-center p-2 rounded-xl cursor-pointer hover:bg-white hover:text-black transition-colors"
+                  >
+                    Finalizar Compra
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         )}

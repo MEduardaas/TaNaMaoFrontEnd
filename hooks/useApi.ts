@@ -16,7 +16,6 @@ export function useApi() {
           'Content-Type': 'application/json',
           ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {})
         },
-        credentials: 'include',
         body: body ? JSON.stringify(body) : undefined
       })
 

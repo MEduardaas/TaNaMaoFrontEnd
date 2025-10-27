@@ -16,7 +16,7 @@ export default function Page() {
   const [form, setForm] = useState({ email: '', senha: '' })
   const [message, setMessage] = useState('')
   const router = useRouter()
-  const { accessToken } = useAuth()
+  const { accessToken, setAccessToken } = useAuth()
 
   if (accessToken) {
     router.replace('/Perfil')
@@ -31,6 +31,7 @@ export default function Page() {
       const res = await apiRequest('/login', 'POST', form)
       // se o backend retornar accessToken ou sucesso, navega para Perfil
       if (res?.accessToken || res?.success) {
+        if (res?.accessToken) setAccessToken(res.accessToken)
         router.replace('/Perfil')
         return
       }

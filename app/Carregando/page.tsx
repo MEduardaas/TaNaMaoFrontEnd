@@ -1,8 +1,5 @@
 import Footer from '@/components/PrinComponents/Footer'
 import NavBar from '@/components/PrinComponents/NavBar'
-import Button from '@/components/subComponents/Button'
-import LinkNavigation from '@/components/subComponents/LinkNavigation'
-import Image from 'next/image'
 import React from 'react'
 
 export default function Page() {

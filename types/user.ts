@@ -24,6 +24,14 @@ export interface Pedido {
   status: PedidoStatus
 }
 
+export interface Cartao {
+  numero: string
+  nomeTitular: string
+  validade: string
+  cvc: string
+  tipoPagamento: string
+}
+
 export interface ProdutoCriado {
   idProduto: string
 }

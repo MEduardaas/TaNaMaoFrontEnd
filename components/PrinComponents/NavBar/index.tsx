@@ -1,4 +1,5 @@
 'use client'
+import Button from '@/components/subComponents/Button'
 import LinkNavigation from '@/components/subComponents/LinkNavigation'
 import ProductCart from '@/components/subComponents/ProductCart'
 import { useApi } from '@/hooks/useApi'
@@ -66,6 +67,11 @@ export default function NavBar() {
 
     getCart()
   }, [apiRequest])
+
+  const finishCart = () => {
+    closeCart()
+    window.location.href = '/Pagamento'
+  }
 
   return (
     <nav className=" bg-primary w-full h-16 flex items-center justify-between px-2 mb-4 lg:px-18">
@@ -176,7 +182,7 @@ export default function NavBar() {
             <div className="flex flex-col gap-4 w-full lg:rounded-lg bg-white p-4 text-black">
               <h2 className="text-2xl">Meu Carrinho</h2>
               <hr className="border-gray-300" />
-              <ul>
+              <ul className="w-full">
                 {items.length === 0 ? (
                   <li>Seu carrinho está vazio</li>
                 ) : (
@@ -198,7 +204,7 @@ export default function NavBar() {
                     return (
                       <li
                         key={String(item.idProduto)}
-                        className="flex justify-between items-center"
+                        className="w-full flex justify-between items-center"
                       >
                         <ProductCart product={product} />
                       </li>
@@ -215,12 +221,7 @@ export default function NavBar() {
                       {price.toFixed(2)}
                     </span>
                   </div>
-                  <Link
-                    href="/Pagamento"
-                    className="bg-black border-2 font-bold border-black w-full text-white text-center p-2 rounded-xl cursor-pointer hover:bg-white hover:text-black transition-colors"
-                  >
-                    Finalizar Compra
-                  </Link>
+                  <Button onClick={finishCart}>Finalizar Compra</Button>
                 </>
               )}
             </div>

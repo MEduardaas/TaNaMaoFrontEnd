@@ -4,7 +4,7 @@ import { IProduto } from '@/types/product'
 import { Trash2 } from 'lucide-react'
 import React from 'react'
 
-export default function ProductCart({ product }: { product: IProduto }) {
+export default function ProductPayment({ product }: { product: IProduto }) {
   const { removeItem } = useCart()
   const { apiRequest } = useApi()
 
@@ -20,12 +20,12 @@ export default function ProductCart({ product }: { product: IProduto }) {
   }
 
   return (
-    <div className=" w-full flex justify-between items-center my-2 gap-4">
+    <div className="bg-white p-5 rounded-2xl w-full flex flex-col md:flex-row justify-between items-center my-2 shadow-sm gap-10">
       <div className="flex flex-col gap-2">
-        <h1 className="w-60">{product.nome}</h1>
+        <h1 className="w-full">{product.nome}</h1>
         <p>R${product.preco}</p>
       </div>
-      <div className="flex gap-4 items-center">
+      <div className="flex gap-6 items-center">
         <img
           src={product.imagemUrl}
           alt={product.nome}

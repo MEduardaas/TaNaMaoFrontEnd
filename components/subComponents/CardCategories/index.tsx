@@ -50,6 +50,9 @@ export default function CardCategories({ title }: { title: string }) {
     case 'Beleza':
       icon = <WandSparkles className="w-10 h-10" />
       break
+    case 'Ferramentas':
+      icon = <Hammer className="w-10 h-10" />
+      break
     default:
       icon = <RefreshCwOff className="w-10 h-10" />
       break

@@ -43,7 +43,8 @@ export default function Home() {
               { title: 'Automóveis' },
               { title: 'Esportes' },
               { title: 'Moda' },
-              { title: 'Beleza' }
+              { title: 'Beleza' },
+              { title: 'Ferramentas' }
             ]}
             numVisible={10}
             numScroll={1}

@@ -34,13 +34,13 @@ export default function Home() {
           <h2 className="md:pl-12 text-2xl">Categorias</h2>
           <Carousel
             value={[
-              { title: 'Móveis' },
-              { title: 'Eletrônicos' },
+              { title: 'Moveis' },
+              { title: 'Eletronicos' },
               { title: 'Livros' },
-              { title: 'Serviços' },
+              { title: 'Servicos' },
               { title: 'Jogos' },
               { title: 'Brinquedos' },
-              { title: 'Automóveis' },
+              { title: 'Automoveis' },
               { title: 'Esportes' },
               { title: 'Moda' },
               { title: 'Beleza' },

@@ -17,10 +17,10 @@ import Link from 'next/link'
 export default function CardCategories({ title }: { title: string }) {
   let icon = null
   switch (title) {
-    case 'Móveis':
+    case 'Moveis':
       icon = <Armchair className="w-10 h-10" />
       break
-    case 'Eletrônicos':
+    case 'Eletronicos':
       icon = <Smartphone className="w-10 h-10" />
       break
     case 'Livros':
@@ -29,7 +29,7 @@ export default function CardCategories({ title }: { title: string }) {
     case 'Ferramentas':
       icon = <Hammer className="w-10 h-10" />
       break
-    case 'Serviços':
+    case 'Servicos':
       icon = <BriefcaseBusiness className="w-10 h-10" />
       break
     case 'Jogos':
@@ -38,7 +38,7 @@ export default function CardCategories({ title }: { title: string }) {
     case 'Brinquedos':
       icon = <Baby className="w-10 h-10" />
       break
-    case 'Automóveis':
+    case 'Automoveis':
       icon = <CarFront className="w-10 h-10" />
       break
     case 'Esportes':

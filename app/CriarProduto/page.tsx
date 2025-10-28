@@ -74,17 +74,17 @@ export default function Page() {
             required
           >
             <option value="">Selecione uma categoria</option>
-            <option value="moveis">Móveis</option>
-            <option value="eletronicos">Eletrônicos</option>
-            <option value="livros">Livros</option>
-            <option value="jogos">Jogos</option>
-            <option value="brinquedos">Brinquedos</option>
-            <option value="automoveis">Automóveis</option>
-            <option value="esportes_lazer">Esportes</option>
-            <option value="moda">Moda</option>
-            <option value="beleza">Beleza</option>
-            <option value="ferramentas">Ferramentas</option>
-            <option value="eletrodomesticos">Eletrodomésticos</option>
+            <option value="Moveis">Móveis</option>
+            <option value="Eletronicos">Eletrônicos</option>
+            <option value="Livros">Livros</option>
+            <option value="Jogos">Jogos</option>
+            <option value="Brinquedos">Brinquedos</option>
+            <option value="Automoveis">Automóveis</option>
+            <option value="Esportes_Lazer">Esportes</option>
+            <option value="Moda">Moda</option>
+            <option value="Beleza">Beleza</option>
+            <option value="Ferramentas">Ferramentas</option>
+            <option value="Eletrodomesticos">Eletrodomésticos</option>
           </select>
 
           <label htmlFor="tipoVenda">Tipo de Venda</label>

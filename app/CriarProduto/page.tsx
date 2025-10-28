@@ -33,8 +33,8 @@ export default function Page() {
     try {
       const res = await apiRequest('/produtos', 'POST', form)
 
-      if (res.status === 201) {
-        window.location.href = '/Perfil'
+      if (res.status === 'created') {
+        window.location.href = '/'
         return
       }
     } catch (error) {

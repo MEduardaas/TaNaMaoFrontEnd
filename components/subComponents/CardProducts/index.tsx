@@ -60,7 +60,7 @@ export default function CardProducts({
         <img
           src={imagemUrl}
           alt="Categorias"
-          className="rounded-lg shadow-md"
+          className="rounded-lg shadow-md "
         />
         <h4>{title}</h4>
       </Link>

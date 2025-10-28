@@ -67,10 +67,9 @@ export default function Home() {
           <h2 className="md:pl-12 text-2xl">Mais Vendidos</h2>
           <Carousel
             value={produtos}
-            numVisible={6}
+            numVisible={4}
             numScroll={1}
             responsiveOptions={[
-              { breakpoint: '1600px', numVisible: 5, numScroll: 1 },
               { breakpoint: '1200px', numVisible: 4, numScroll: 1 },
               { breakpoint: '1024px', numVisible: 3, numScroll: 1 },
               { breakpoint: '768px', numVisible: 2, numScroll: 1 },
@@ -78,21 +77,21 @@ export default function Home() {
             ]}
             className="custom-carousel"
             circular
-            itemTemplate={() => (
+            itemTemplate={(
+              product: IProduto & { _id?: string; idProduto?: string }
+            ) => (
               <div className="px-2 flex justify-center">
-                <div className="w-full flex gap-4">
-                  {produtos.map((product: IProduto & { _id?: string }) => (
-                    <CardProducts
-                      key={product._id ?? product.idProduto}
-                      id={product._id ?? product.idProduto}
-                      title={product.nome}
-                      category={product.categoria}
-                      tipoVenda={product.tipoVenda}
-                      preco={product.preco}
-                      quantidadeVendida={product.quantidadeVendida}
-                      imagemUrl={product.imagemUrl}
-                    />
-                  ))}
+                <div className="w-60">
+                  <CardProducts
+                    key={product._id ?? product.idProduto}
+                    id={product._id ?? product.idProduto}
+                    title={product.nome}
+                    category={product.categoria}
+                    tipoVenda={product.tipoVenda}
+                    preco={product.preco}
+                    quantidadeVendida={product.quantidadeVendida}
+                    imagemUrl={product.imagemUrl}
+                  />
                 </div>
               </div>
             )}
@@ -103,10 +102,9 @@ export default function Home() {
           <h2 className="md:pl-12 text-2xl">Bem Avaliados</h2>
           <Carousel
             value={produtos}
-            numVisible={6}
+            numVisible={4}
             numScroll={1}
             responsiveOptions={[
-              { breakpoint: '1600px', numVisible: 5, numScroll: 1 },
               { breakpoint: '1200px', numVisible: 4, numScroll: 1 },
               { breakpoint: '1024px', numVisible: 3, numScroll: 1 },
               { breakpoint: '768px', numVisible: 2, numScroll: 1 },
@@ -114,21 +112,21 @@ export default function Home() {
             ]}
             className="custom-carousel"
             circular
-            itemTemplate={() => (
+            itemTemplate={(
+              product: IProduto & { _id?: string; idProduto?: string }
+            ) => (
               <div className="px-2 flex justify-center">
-                <div className="w-full flex gap-4">
-                  {produtos.map(product => (
-                    <CardProducts
-                      key={product._id}
-                      id={product._id}
-                      title={product.nome}
-                      category={product.categoria}
-                      tipoVenda={product.tipoVenda}
-                      preco={product.preco}
-                      quantidadeVendida={product.quantidadeVendida}
-                      imagemUrl={product.imagemUrl}
-                    />
-                  ))}
+                <div className="w-60">
+                  <CardProducts
+                    key={product._id ?? product.idProduto}
+                    id={product._id ?? product.idProduto}
+                    title={product.nome}
+                    category={product.categoria}
+                    tipoVenda={product.tipoVenda}
+                    preco={product.preco}
+                    quantidadeVendida={product.quantidadeVendida}
+                    imagemUrl={product.imagemUrl}
+                  />
                 </div>
               </div>
             )}

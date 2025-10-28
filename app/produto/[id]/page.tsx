@@ -10,6 +10,14 @@ import StarRating from '@/components/subComponents/StarRating'
 import { useApi } from '@/hooks/useApi'
 import { IProduto } from '@/types/product'
 
+interface Avaliacao {
+  idUsuario: string
+  nome: string
+  nota: number
+  comentario: string
+  time: string
+}
+
 export default function ProdutoDetalhe() {
   const [produto, setProduto] = useState<IProduto | null>(null)
   const { openCart, addItem } = useCart()
@@ -28,7 +36,7 @@ export default function ProdutoDetalhe() {
       const ids = Array.from(
         new Set(
           produtoCarregado.avaliacoes
-            .map((a: any) => a.idUsuario)
+            .map((a: Avaliacao) => a.idUsuario)
             .filter(Boolean)
         )
       ) as string[]
@@ -50,7 +58,7 @@ export default function ProdutoDetalhe() {
       )
 
       produtoCarregado.avaliacoes = produtoCarregado.avaliacoes.map(
-        (a: any) => ({
+        (a: Avaliacao) => ({
           ...a,
           nome: a.nome || nameMap[a.idUsuario] || 'Usuário'
         })

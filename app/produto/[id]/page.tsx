@@ -194,7 +194,7 @@ export default function ProdutoDetalhe() {
           ) : (
             produto.avaliacoes?.map(avaliacao => (
               <Avaliacao
-                key={avaliacao.idUsuario}
+                key={Math.random()}
                 nome={avaliacao.nome}
                 nota={avaliacao.nota}
                 comentario={avaliacao.comentario}

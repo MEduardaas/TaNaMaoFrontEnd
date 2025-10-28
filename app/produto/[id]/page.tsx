@@ -6,6 +6,7 @@ import Button from '@/components/subComponents/Button'
 import { useEffect, useState } from 'react'
 import { useCart } from '@/Provider/useCart'
 import Avaliacao from '@/components/subComponents/Avaliacao'
+import StarRating from '@/components/subComponents/StarRating'
 import { useApi } from '@/hooks/useApi'
 import { IProduto } from '@/types/product'
 
@@ -15,13 +16,16 @@ export default function ProdutoDetalhe() {
   const { apiRequest } = useApi()
   const params = useParams()
   const produtoId = params.id
+  const [rating, setRating] = useState(0)
+  const [message, setMessage] = useState('')
+
+  const fetchProduto = async () => {
+    if (!produtoId) return
+    const response = await apiRequest(`/produtos/${produtoId}`, 'GET')
+    setProduto(response.produto)
+  }
 
   useEffect(() => {
-    const fetchProduto = async () => {
-      if (!produtoId) return
-      const response = await apiRequest(`/produtos/${produtoId}`, 'GET')
-      setProduto(response.produto)
-    }
     fetchProduto()
   }, [apiRequest, produtoId])
 
@@ -60,6 +64,25 @@ export default function ProdutoDetalhe() {
       openCart()
     } catch (error) {
       console.error('Erro ao adicionar ao carrinho:', error)
+    }
+  }
+
+  const handleSubmitReview = async (e: React.FormEvent) => {
+    e.preventDefault()
+    try {
+      const res = await apiRequest(
+        `/produtos/${produtoId}/avaliacoes`,
+        'POST',
+        {
+          nota: rating,
+          comentario: message
+        }
+      )
+      setMessage('')
+      setRating(0)
+      console.log('Avaliação enviada com sucesso:', res)
+    } catch (error) {
+      console.error('Erro ao enviar avaliação:', error)
     }
   }
 
@@ -104,7 +127,30 @@ export default function ProdutoDetalhe() {
           </div>
         </div>
         <div>
-          <h2 className="text-xl font-bold mt-4">Avaliacoes</h2>
+          <h2 className="text-2xl font-bold my-4">Comentário</h2>
+          <form
+            onSubmit={handleSubmitReview}
+            className="w-100 flex flex-col gap-1"
+          >
+            <div className="mb-4">
+              <p className="text-xl mb-2">Classificação</p>
+              <StarRating value={rating} onChange={v => setRating(v)} />
+            </div>
+
+            <div className="mb-2">
+              <p className="text-xl">Mensagem</p>
+              <textarea
+                className="w-full border-2 border-gray-300 rounded-lg p-2 mt-2"
+                rows={4}
+                value={message}
+                onChange={e => setMessage(e.target.value)}
+              />
+            </div>
+
+            <div className="w-50">
+              <Button>Enviar</Button>
+            </div>
+          </form>
           <Avaliacao nome="kleberson" nota={5} comentario="Ótimo produto!" />
         </div>
       </main>

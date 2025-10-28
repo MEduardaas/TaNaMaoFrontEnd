@@ -13,6 +13,7 @@ import {
   Search,
   ShoppingCart,
   User,
+  UserCog,
   X
 } from 'lucide-react'
 import Image from 'next/image'
@@ -21,6 +22,7 @@ import { useEffect, useState } from 'react'
 
 export default function NavBar() {
   const [menuState, setMenuState] = useState(false)
+  const [config, setConfig] = useState(false)
   const { isOpen, openCart, closeCart, items, addItem, clearCart } = useCart()
   const { accessToken, logout } = useAuth()
   const isLogged = !!accessToken
@@ -146,6 +148,139 @@ export default function NavBar() {
         </div>
       </span>
 
+      <span className="flex lg:hidden items-center sm:pl-12">
+        {config ? (
+          <X
+            className="flex lg:hidden text-white m-4 hover:cursor-pointer "
+            onClick={() => setConfig(!config)}
+          />
+        ) : (
+          <UserCog
+            className="flex lg:hidden text-white m-4 hover:cursor-pointer "
+            onClick={() => setConfig(!config)}
+          />
+        )}
+        {config && (
+          <div className="absolute top-16 right-0 lg:right-5 lg:rounded-lg w-full lg:max-w-fit bg-primary flex flex-col items-center z-10">
+            {!isLogged && (
+              <>
+                <LinkNavigation href="/Cadastrar" className="text-white mr-4">
+                  Crie sua conta
+                </LinkNavigation>
+                <LinkNavigation href="/Login" className="text-white">
+                  Entrar
+                </LinkNavigation>
+              </>
+            )}
+
+            <LinkNavigation
+              href="/Perfil"
+              className=" w-full flex justify-center items-center text-white py-2"
+            >
+              <User className="text-white m-4 hover:cursor-pointer" />
+              <p>Meu Perfil</p>
+            </LinkNavigation>
+
+            <div className="w-full flex justify-center items-center text-white py-2">
+              {isOpen ? (
+                <>
+                  <ShoppingCart
+                    className="text-white m-4 hover:cursor-pointer "
+                    onClick={closeCart}
+                  />
+                  <button
+                    onClick={closeCart}
+                    className="hover:underline hover:cursor-pointer"
+                  >
+                    Fechar Carrinho
+                  </button>
+                </>
+              ) : (
+                <>
+                  <ShoppingCart
+                    className="text-white m-4 hover:cursor-pointer "
+                    onClick={openCart}
+                  />
+
+                  <button
+                    onClick={openCart}
+                    className="hover:underline hover:cursor-pointer"
+                  >
+                    Abrir Carrinho
+                  </button>
+                </>
+              )}
+            </div>
+
+            <LinkNavigation
+              href="/"
+              className=" w-full flex justify-center items-center text-white py-2"
+            >
+              <Heart className="text-white m-4 hover:cursor-pointer" />
+              <p>Favoritos</p>
+            </LinkNavigation>
+
+            <LinkNavigation
+              href="/CriarProduto"
+              className=" w-full flex justify-center items-center text-white py-2"
+            >
+              <CirclePlus className="text-white m-4 hover:cursor-pointer" />
+              <p>Criar Produto</p>
+            </LinkNavigation>
+            {isOpen && (
+              <div className="relative top-16 right-0 lg:right-5 lg:rounded-lg w-full lg:max-w-fit bg-white flex flex-col items-start gap-4  z-10">
+                <div className="flex flex-col gap-4 w-full lg:rounded-lg bg-white p-4 text-black">
+                  <h2 className="text-2xl">Meu Carrinho</h2>
+                  <hr className="border-gray-300" />
+                  <ul className="w-full">
+                    {items.length === 0 ? (
+                      <li>Seu carrinho está vazio</li>
+                    ) : (
+                      items.map(item => {
+                        const product: IProduto = {
+                          idProduto: item.idProduto,
+                          idVendedor: '',
+                          nome: item.nome || 'Produto',
+                          categoria: '',
+                          tipoVenda: 0,
+                          preco: item.preco ?? 0,
+                          descricao: '',
+                          imagemUrl:
+                            item.imagemUrl || '/images/placeholder.png',
+                          quantidade: item.quantidade ?? 0,
+                          quantidadeVendida: 0,
+                          avaliacoes: []
+                        }
+
+                        return (
+                          <li
+                            key={String(item.idProduto)}
+                            className="w-full flex justify-between items-center"
+                          >
+                            <ProductCart product={product} />
+                          </li>
+                        )
+                      })
+                    )}
+                  </ul>
+                  {items.length > 0 && (
+                    <>
+                      <hr className="border-gray-300" />
+                      <div className="w-full flex justify-start items-center">
+                        <span className="font-bold text-lg">Total: R$ </span>
+                        <span className="font-bold text-lg">
+                          {price.toFixed(2)}
+                        </span>
+                      </div>
+                      <Button onClick={finishCart}>Finalizar Compra</Button>
+                    </>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </span>
       <span className="hidden lg:flex items-center sm:pl-12">
         {!isLogged && (
           <>

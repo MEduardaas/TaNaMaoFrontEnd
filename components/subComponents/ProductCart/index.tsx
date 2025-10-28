@@ -20,7 +20,7 @@ export default function ProductCart({ product }: { product: IProduto }) {
   }
 
   return (
-    <div className=" w-full flex justify-between items-center my-2 gap-4">
+    <div className=" w-full flex flex-col sm:flex-row justify-between items-center my-2 gap-4">
       <div className="flex flex-col gap-2">
         <h1 className="w-60">{product.nome}</h1>
         <p>R${product.preco}</p>

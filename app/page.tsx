@@ -68,7 +68,7 @@ export default function Home() {
           <h2 className="md:pl-12 text-2xl">Mais Vendidos</h2>
           <Carousel
             value={produtos}
-            numVisible={4}
+            numVisible={5}
             numScroll={1}
             responsiveOptions={[
               { breakpoint: '1200px', numVisible: 4, numScroll: 1 },
@@ -103,7 +103,7 @@ export default function Home() {
           <h2 className="md:pl-12 text-2xl">Bem Avaliados</h2>
           <Carousel
             value={produtos}
-            numVisible={4}
+            numVisible={5}
             numScroll={1}
             responsiveOptions={[
               { breakpoint: '1200px', numVisible: 4, numScroll: 1 },

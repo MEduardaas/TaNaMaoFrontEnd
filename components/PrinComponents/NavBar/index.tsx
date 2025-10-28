@@ -19,6 +19,7 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function NavBar() {
   const [menuState, setMenuState] = useState(false)
@@ -28,6 +29,8 @@ export default function NavBar() {
   const isLogged = !!accessToken
   const { apiRequest } = useApi()
   const [price, setPrice] = useState(0)
+  const [searchTerm, setSearchTerm] = useState('')
+  const router = useRouter()
 
   useEffect(() => {
     const total = items.reduce((sum, it) => {
@@ -68,7 +71,7 @@ export default function NavBar() {
     }
 
     getCart()
-  }, [apiRequest])
+  }, [apiRequest, addItem, clearCart])
 
   const finishCart = () => {
     closeCart()
@@ -142,10 +145,25 @@ export default function NavBar() {
           type="text"
           placeholder='O que você está procurando? Ex: "Parafusadeira 3/4"'
           className="bg-background placeholder-gray-500 text-black rounded-l-2xl  w-full  h-8 border-white focus:outline-none pl-4"
+          onChange={e => setSearchTerm(e.target.value)}
+          value={searchTerm}
+          onKeyDown={e => {
+            if (e.key === 'Enter') {
+              const q = searchTerm.trim()
+              if (q) router.push(`/Pesquisa?query=${encodeURIComponent(q)}`)
+            }
+          }}
         />
-        <div className="bg-background rounded-r-2xl h-8 hover:cursor-pointer flex items-center justify-center pr-3">
+        <button
+          type="button"
+          className="bg-background rounded-r-2xl h-8 hover:cursor-pointer flex items-center justify-center pr-3"
+          onClick={() => {
+            const q = searchTerm.trim()
+            if (q) router.push(`/Pesquisa?query=${encodeURIComponent(q)}`)
+          }}
+        >
           <Search className=" text-black  " />
-        </div>
+        </button>
       </span>
 
       <span className="flex lg:hidden items-center sm:pl-12">

@@ -32,6 +32,13 @@ export default function Page() {
       // se o backend retornar accessToken ou sucesso, navega para Perfil
       if (res?.accessToken || res?.success) {
         if (res?.accessToken) setAccessToken(res.accessToken)
+        if (res?.refreshToken && typeof window !== 'undefined') {
+          try {
+            localStorage.setItem('refreshToken', res.refreshToken)
+          } catch (e) {
+            console.error('Não foi possível salvar refreshToken:', e)
+          }
+        }
         router.replace('/Perfil')
         return
       }

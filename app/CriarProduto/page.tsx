@@ -1,4 +1,3 @@
-
 'use client'
 import Footer from '@/components/PrinComponents/Footer'
 import NavBar from '@/components/PrinComponents/NavBar'
@@ -9,9 +8,8 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { Failed } from '@/components/subComponents/Popup'
 
-export default function page() {
+export default function Page() {
   const { accessToken, loading } = useAuth()
-
   const { apiRequest } = useApi()
   const [message, setMessage] = useState('')
   const [form, setForm] = useState({

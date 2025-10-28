@@ -3,11 +3,12 @@
 import React, {
   createContext,
   useContext,
-  useEffect,
   useState,
-  useCallback
+  useCallback,
+  useEffect
 } from 'react'
 import { useRouter } from 'next/navigation'
+import { useApi } from '@/hooks/useApi'
 
 type AuthContextType = {
   accessToken: string | null
@@ -16,43 +17,18 @@ type AuthContextType = {
   logout: () => Promise<void>
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined)
+const AuthContext = createContext<AuthContextType>({
+  accessToken: null,
+  loading: true,
+  setAccessToken: () => {},
+  logout: async () => {}
+})
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter()
   const [accessToken, setAccessTokenState] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    let mounted = true
-
-    async function init() {
-      try {
-        const res = await fetch('/api/refresh', {
-          method: 'POST',
-          credentials: 'include',
-          headers: { 'Content-Type': 'application/json' }
-        })
-
-        if (!res.ok) {
-          if (mounted) setAccessTokenState(null)
-          return
-        }
-
-        const data = await res.json()
-        if (mounted) setAccessTokenState(data?.accessToken ?? null)
-      } catch {
-        if (mounted) setAccessTokenState(null)
-      } finally {
-        if (mounted) setLoading(false)
-      }
-    }
-
-    init()
-    return () => {
-      mounted = false
-    }
-  }, [])
+  const { apiRequest } = useApi()
 
   const setAccessToken = useCallback((t: string | null) => {
     setAccessTokenState(t)
@@ -60,11 +36,58 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const logout = useCallback(async () => {
     try {
-      await fetch('/api/logout', { method: 'POST', credentials: 'include' })
+      // try to notify backend to remove refresh token if it exists in storage
+      const stored =
+        typeof window !== 'undefined'
+          ? localStorage.getItem('refreshToken')
+          : null
+      await apiRequest('/logout', 'POST', { refreshToken: stored })
+    } catch (error) {
+      console.error('Erro ao fazer logout:', error)
+    }
+    try {
+      if (typeof window !== 'undefined') localStorage.removeItem('refreshToken')
     } catch {}
     setAccessTokenState(null)
     router.replace('/Login')
-  }, [router])
+  }, [router, apiRequest])
+
+  useEffect(() => {
+    let mounted = true
+
+    async function tryRestore() {
+      if (typeof window === 'undefined') return
+      const stored = localStorage.getItem('refreshToken')
+      if (!stored) {
+        if (mounted) setLoading(false)
+        return
+      }
+
+      try {
+        const res = await apiRequest('/refresh', 'POST', {
+          refreshToken: stored
+        })
+        if (res?.accessToken && mounted) setAccessTokenState(res.accessToken)
+        // if backend rotated refresh token and returned a new one, persist it
+        if (res?.refreshToken && typeof window !== 'undefined') {
+          localStorage.setItem('refreshToken', res.refreshToken)
+        }
+      } catch (err) {
+        console.error('Refresh falhou:', err)
+        try {
+          localStorage.removeItem('refreshToken')
+        } catch {}
+        if (mounted) setAccessTokenState(null)
+      } finally {
+        if (mounted) setLoading(false)
+      }
+    }
+
+    tryRestore()
+    return () => {
+      mounted = false
+    }
+  }, [apiRequest])
 
   return (
     <AuthContext.Provider
@@ -77,6 +100,5 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
 export function useAuthContext() {
   const ctx = useContext(AuthContext)
-  if (!ctx) throw new Error('useAuthContext must be used within AuthProvider')
   return ctx
 }

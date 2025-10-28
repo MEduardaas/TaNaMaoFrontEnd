@@ -78,11 +78,22 @@ export default function Page() {
     setPrice(total)
   }, [items])
 
+  const fetchPayment = async () => {
+    try {
+      const res = await apiRequest('/pedidos', 'POST')
+      return res
+    } catch (error) {
+      console.error('Erro ao buscar dados do pagamento:', error)
+    }
+  }
+
   const handlePayment = (e: React.FormEvent) => {
     e.preventDefault()
     if (paymentMethod === 'pix') {
+      fetchPayment()
       router.push('/Pix')
     } else {
+      fetchPayment()
       router.push('/Sucesso')
     }
   }

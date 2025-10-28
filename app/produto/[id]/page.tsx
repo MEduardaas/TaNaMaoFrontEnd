@@ -22,7 +22,43 @@ export default function ProdutoDetalhe() {
   const fetchProduto = async () => {
     if (!produtoId) return
     const response = await apiRequest(`/produtos/${produtoId}`, 'GET')
-    setProduto(response.produto)
+    // Preencher nome do usuário nas avaliações quando necessário
+    const produtoCarregado = response.produto
+    if (produtoCarregado?.avaliacoes?.length) {
+      const ids = Array.from(
+        new Set(
+          produtoCarregado.avaliacoes
+            .map((a: any) => a.idUsuario)
+            .filter(Boolean)
+        )
+      ) as string[]
+
+      const nameMap: Record<string, string> = {}
+      await Promise.all(
+        ids.map(async id => {
+          const idStr = String(id)
+          try {
+            const userRes = await apiRequest(`/usuarios/${idStr}`, 'GET')
+            // Suporte a diferentes formatos de resposta: { usuario: { nome } } ou { nome }
+            console.log('Resposta do usuário para ID', userRes)
+            nameMap[idStr] = userRes.user?.nome || userRes.nome || 'Usuário'
+          } catch (err) {
+            console.warn('Não foi possível buscar nome do usuário', idStr, err)
+            nameMap[idStr] = 'Usuário'
+          }
+        })
+      )
+
+      produtoCarregado.avaliacoes = produtoCarregado.avaliacoes.map(
+        (a: any) => ({
+          ...a,
+          nome: a.nome || nameMap[a.idUsuario] || 'Usuário'
+        })
+      )
+    }
+
+    setProduto(produtoCarregado)
+    console.log('Produto carregado:', produtoCarregado)
   }
 
   useEffect(() => {
@@ -78,8 +114,10 @@ export default function ProdutoDetalhe() {
           comentario: message
         }
       )
+      // Após criar a avaliação, recarrega o produto para exibir a nova avaliação
       setMessage('')
       setRating(0)
+      await fetchProduto()
       console.log('Avaliação enviada com sucesso:', res)
     } catch (error) {
       console.error('Erro ao enviar avaliação:', error)
@@ -151,7 +189,19 @@ export default function ProdutoDetalhe() {
               <Button>Enviar</Button>
             </div>
           </form>
-          <Avaliacao nome="kleberson" nota={5} comentario="Ótimo produto!" />
+          {produto.avaliacoes?.length === 0 ? (
+            <p>Nenhuma avaliação ainda.</p>
+          ) : (
+            produto.avaliacoes?.map(avaliacao => (
+              <Avaliacao
+                key={avaliacao.idUsuario}
+                nome={avaliacao.nome}
+                nota={avaliacao.nota}
+                comentario={avaliacao.comentario}
+                data={new Date(avaliacao.time).toLocaleDateString('pt-BR')}
+              />
+            ))
+          )}
         </div>
       </main>
       <Footer />

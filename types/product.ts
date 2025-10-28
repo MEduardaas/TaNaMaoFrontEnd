@@ -3,8 +3,10 @@
 
 export interface IAvaliacao {
   idUsuario: string
+  nome: string
   nota: number
   comentario: string
+  time: string
 }
 
 export interface IProduto {
